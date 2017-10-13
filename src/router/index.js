@@ -1,9 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Button from '@/components/Button'
-import input from '@/components/input'
-import previewImg from '@/components/previewImg'
-import Lazyload from '@/components/Lazyload'
+import carEvaluate from '@/pages/car/carEvaluate'
+import applyBM from '@/pages/car/applyBM'
+import offlineManage from '@/pages/car/offlineManage'
 
 Vue.use(Router)
 
@@ -11,23 +10,18 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Button',
-      component: Button
+      name: 'carEvaluate',
+      component: carEvaluate
     },
     {
-      path: '/input',
-      name: 'input',
-      component: input
+      path: '/applyBM',
+      name: 'applyBM',
+      component: applyBM
     },
     {
-      path: '/previewImg',
-      name: 'previewImg',
-      component: previewImg
-    },
-    {
-      path: '/Lazyload',
-      name: 'Lazyload',
-      component: Lazyload
+      path: '/offlineManage',
+      name: 'offlineManage',
+      component: offlineManage
     }
   ]
 })
