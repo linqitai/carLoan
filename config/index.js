@@ -11,7 +11,7 @@ module.exports = {
     index: path.resolve(__dirname, '../dist/index.html'),
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/',
+    assetsPublicPath: './',
     productionSourceMap: true,
     // Gzip off by default as many popular static hosts such as
     // Surge or Netlify already gzip all static assets for you.
@@ -32,14 +32,14 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/carLoan': {
+      '/rz': {
         // target:'http://192.168.18.170:8061',// 义良
         // target:'http://192.168.18.218:8061',// 张胜
         // target: 'http://192.168.18.220:8061',// 修庆
         target:'http://192.168.18.177:8030',// 子涵
         changeOrigin: true,
         pathRewrite: {
-        '^/carLoan': ''
+        '^/rz': ''
         }
       }
     },

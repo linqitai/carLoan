@@ -1,6 +1,10 @@
 import http from './public'
-let root = '/carLoan'
+let root = '/rz'
 // let root = 'http://192.168.18.177:8030'
+// 用户进入页面后保存数据
+export const visit = (params) => {
+  return http.fetchPost(root + '/m/filter/cheCredit/visit.json', params)
+}
 // 车辆品牌列表
 export const queryForBrankList = (params) => {
   return http.fetchPost(root + '/m/filter/cheCredit/queryForBrankList.json', params)
@@ -21,7 +25,11 @@ export const queryCitylList = (params) => {
 export const queryCarPrice = (params) => {
   return http.fetchPost(root + '/m/filter/cheCredit/queryCarPrice.json', params)
 }
+// 修改申请状态
+export const editApplyStatus = (params) => {
+  return http.fetchPost(root + '/m/filter/cheCredit/editApplyStatus.json', params)
+}
 // 提交申请
 export const submitApply = (params) => {
-  return http.fetchPost(root + ' /m/filter/cheCredit/submitApply.json', params)
+  return http.fetchPost(root + '/m/filter/cheCredit/submitApply.json', params)
 }

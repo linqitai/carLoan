@@ -37,8 +37,20 @@
 .bg_color_success{
     background-color: #2CD28A;
 }
+.bg_color_green{
+    background-color: #00917e;
+}
 .fs13{
     font-size: 13px;
+    color: #323232;
+}
+.fs14{
+    font-size: 14px;
+    color: #323232;
+}
+.fontSize{
+    font-size: 11px;
+    color: #646464;
 }
 .font-orange {
     color: #FC633D;
@@ -55,8 +67,8 @@
     color: #323232;
 }
 .mtb18{
-    margin-top: 18px;
-    margin-bottom: 10px;
+    margin-top: 10px;
+    margin-bottom: 6px;
 }
 .mt10{
     margin-top: 10px;
@@ -85,5 +97,6 @@
 .left{
     float: left;
 }
-$main-color:#fc633d;
+// 溢出省略号
+$main-color:#00917e;
 $main-bg-color:#f5f5f5;

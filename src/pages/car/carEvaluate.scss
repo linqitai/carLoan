@@ -1,4 +1,10 @@
 @import '../../common/scss/index.scss';
+@mixin bgImage($url){
+  background-image: url($url + "@2x.png");
+  @media (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3){
+    background-image: url($url + "@3x.png");
+  }
+}
 .carEvaluate{
   font-family: PingFang-SC-Medium;
   .mint-cell-wrapper{
@@ -6,8 +12,8 @@
   }
   .steps_wrapper {
     background-color: #ffffff;
-    padding-top: 12px;
-    padding-bottom: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     .steps {
       font-size: 0;
       .steps_icon {
@@ -16,13 +22,13 @@
         height: 34px;
         background-size: 274px 34px;
         &.bgImg1{
-          background-image: url('../../common/images/title_tab.png');
+          @include bgImage($url:'../../common/images/apply_title_tab01');
         }
         &.bgImg2{
-          background-image: url('../../common/images/title_tab02.png');
+          @include bgImage($url:'../../common/images/apply_title_tab02');
         }
         &.bgImg3{
-          background-image: url('../../common/images/title_tab03.png');
+          @include bgImage($url:'../../common/images/apply_title_tab03');
         }
       }
       .steps_texts {
@@ -35,7 +41,7 @@
           text-align: center;
           color: #999999;
           &.active {
-            color: RGB(255, 87, 34);
+            color: $main-color;
           }
         }
       }
@@ -53,7 +59,7 @@
       margin-top: 28px;
       margin-bottom: 48px;
       display: block;
-      @include bg-image($url:'../../common/images/icon_success');
+      @include bgImage($url:'../../common/images/icon_success');
       background-repeat: no-repeat;
       background-size: 105px 65px; 
     }
@@ -113,19 +119,25 @@
     //   margin: 20px auto;
     //   display: block;
     // }
+  }
+  .btnBox{
     .beginEvaluateBtn{
-      width: 84px;
-      height: 84px;
-      margin: 20px auto;
+      width: 96px;
+      height: 86px;
+      margin: 0px auto;
       display: block;
-      @include bg-image($url:'../../common/images/apply_btn_begin');
+      // @include bgImage($url:'./apply_btn_begin');
+      background-image: url("http://static.hpbanking.com/xg/uploads/files/426e20428c984e0b968443458fb5a653-222-230.png");
+      @media (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3){
+        background-image: url("http://static.hpbanking.com/xg/uploads/files/975ab0a618ac4faf2c198b39bf224a8c-333-345.png");
+      }
       background-repeat: no-repeat;
-      background-size: 84px 84px; 
+      background-size: 104px 104px; 
     }
     .btnWrapper {
       text-align: center;
-      margin-top: 20px;
-      margin-bottom: 20px;
+      margin-top: 16px;
+      margin-bottom: 16px;
       .amount{
         color: $main-color;
         font-size: 24px;
@@ -138,7 +150,6 @@
   .advantageWrapper{
     padding-left: 16px;
     padding-right: 16px;
-    margin-top: 26px;
     .title{
       border-left: 3px solid $main-color;
       padding-left: 10px;
@@ -146,14 +157,13 @@
     .content{
       display: flex;
       background-color: #ffffff;
-      margin-top: 20px;
-      margin-bottom: 30px;
+      margin-top: 12px;
       .box{
         flex: 1;
         text-align: center;
         font-size: 13px;
-        padding-top: 20px;
-        padding-bottom: 20px;
+        padding-top: 10px;
+        padding-bottom: 10px;
         .img{
           width: 38px;
           height: 38px;
@@ -162,13 +172,13 @@
           background-repeat: no-repeat;
           background-size: 38px 38px;
           &.img1{
-            @include bg-image($url:'../../common/images/icon_rate');
+            @include bgImage($url:'../../common/images/icon_rate');
           }
           &.img2{
-            @include bg-image($url:'../../common/images/icon_quick');
+            @include bgImage($url:'../../common/images/icon_quick');
           }
           &.img3{
-            @include bg-image($url:'../../common/images/icon_limit');
+            @include bgImage($url:'../../common/images/icon_limit');
           }
         }
       }
@@ -207,11 +217,14 @@
         .img{
           width: 93px;
           height: 53px;
-          margin: 0 auto;
+          margin: 10px auto 0 auto;
           display: block;
           background-repeat: no-repeat;
           background-size: 93px 53px;
-          @include bg-image($url:'../../common/images/logo_wdw');
+          background-image: url("http://static.hpbanking.com/xg/uploads/files/c79e44d1738fa9b451ef700f3b9d1b8e-279-159.png");
+          @media (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3){
+            background-image: url("http://static.hpbanking.com/xg/uploads/files/a1825def5fff10ae428796b4304dad7f-186-106.png");
+          }
         }
       }
     }

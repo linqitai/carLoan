@@ -1,6 +1,6 @@
 <template>
   <div class="carEvaluate" style="background-color:#fff">
-    <m-header>线下办理</m-header>
+    <m-header>臻车贷</m-header>
     <div class="base">
       <div class="steps_wrapper">
         <div class="steps">
@@ -17,7 +17,7 @@
         <div class="success"></div>
         <div class="text">您的借款申请已提交，微贷网工作人员线下会联系您，请耐心等待并保持手机畅通！</div>
         <div class="btnWrapper">
-          <button class="next_step_btn bg_color_success" ref="next_step_btn" @click="submitApply">完成</button>
+          <button class="next_step_btn bg_color_green" ref="next_step_btn" @click="submitApply">完成</button>
         </div>
       </section>
     </div>
@@ -46,14 +46,27 @@ export default {
           values: ['微贷网'],
           className: 'column1'
         }
-      ]
+      ],
+      customerKey: '',
+      accountTel: '',
+      type: '',
+      shopId: '',
+      isLogin: '',
+      from: ''
     }
   },
   created() {
+    this.customerKey = localStorage.getItem('customerKey')
+    this.accountTel = localStorage.getItem('accountTel')
+    this.type = localStorage.getItem('type')
+    this.shopId = localStorage.getItem('shopId')
+    this.isLogin = localStorage.getItem('isLogin')
+    this.from = localStorage.getItem('from')
   },
   methods: {
     submitApply() {
-      // begin
+      // window.location.href = `http://114.55.32.138/bigData/cdd/dist/#/carEvaluate?customerKey=${this.customerKey}&type=${this.type}&shopId=${this.shopId}&isLogin=${this.isLogin}&accountTel=${this.accountTel}`
+      this.$router.push(`/carEvaluate?customerKey=${this.customerKey}&type=${this.type}&shopId=${this.shopId}&isLogin=${this.isLogin}&accountTel=${this.accountTel}&from=${this.from}`)
     },
     carTypeEvent() {
       this.showPlatFormPop = true;

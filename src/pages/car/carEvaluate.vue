@@ -1,6 +1,6 @@
 <template>
   <div class='carEvaluate'>
-    <m-header>车辆评估</m-header>
+    <m-header>臻车贷</m-header>
     <div class='steps_wrapper'>
       <div class='steps'>
         <div class='steps_icon bgImg1'></div>
@@ -56,8 +56,8 @@
             </span>
           </mt-index-section>
           <!-- <template v-for='(item, index) in seriesList'>
-                            <div class="selectTitle border-1px" :key="index" @click="chooseSeries(item.seriesId)">{{item.seriesName}}</div>
-                          </template> -->
+                                                                                          <div class="selectTitle border-1px" :key="index" @click="chooseSeries(item.seriesId)">{{item.seriesName}}</div>
+                                                                                        </template> -->
         </mt-index-list>
       </van-popup>
       <!-- 选择车型POPUP -->
@@ -78,12 +78,6 @@
               </div>
             </span>
           </mt-index-section>
-          <!-- <template v-for='(item, index) in modelList'>
-                          <div class="selectModel border-1px" @click="chooseModel(item.modelName)" :key="index">
-                            <div>{{item.modelName}}</div>
-                            <div class="mt10">指导价：{{item.modelPrice}}, 排量：{{item.liter}}</div>
-                          </div>
-                        </template> -->
         </mt-index-list>
       </van-popup>
       <div class='myCellWrapper border-1px' @click='timeEvent'>
@@ -97,8 +91,11 @@
       </div>
       <!-- 上牌时间Popup -->
       <van-popup v-model='showTimePopup' position='bottom' class='van-popup-2'>
-        <van-datetime-picker type='date' :min-date='minDate' :max-date='maxDate' @confirm='timeHandlePickerConfirm'>
-        </van-datetime-picker>
+        <div class="page-picker-wrapper" style="margin-bottom:2rem;">
+          <span style="float:left;font-size:1rem;padding:0.7rem 1rem" @click='showTimePopup = false'>取消</span>
+          <span style="float:right;font-size:1rem;padding:0.7rem 1rem;color:#5aa8f0" @click='timeHandlePickerConfirm()'>确定</span>
+        </div>
+        <mt-picker :slots="slotsDate" @change="timeChange"></mt-picker>
       </van-popup>
       <div class='myCellWrapper border-1px' @click='cityEvent'>
         <div class='title'>所在城市</div>
@@ -123,7 +120,8 @@
           <van-icon name='clear' />
         </div>
       </div>
-      <!-- <img class='beginBtn' src='../../common/images/apply_btn_begin@3x.png' alt=''> -->
+    </section>
+    <section class="btnBox">
       <!-- 开始评估按钮 -->
       <div class='beginEvaluateBtn' v-show='!isEvaluate' @click='beginEvaluateEvent'></div>
 
@@ -131,37 +129,40 @@
         <div>车辆评估价：
           <span class='amount'>{{highPrice}}万</span>
         </div>
-        <button class='next_step_btn bg_corlor_orange mt24' ref='next_step_btn' @click='applyBtn($event)'>申请借款</button>
+        <button class='next_step_btn bg_color_green mt24' ref='next_step_btn' @click='applyBtn($event)'>申请借款</button>
       </div>
     </section>
     <section class='advantageWrapper'>
-      <div class='title'>我们的优势</div>
+      <div class='title' v-if="showAdvantage">我们的优势</div>
       <div class='content'>
         <div class='box'>
           <div class='img img1'></div>
-          <div class='mtb18'>费率低</div>
-          <div>月费率9厘起</div>
+          <div class='mtb18 fs14'>费率低</div>
+          <div class="fontSize" v-if="showAdvantage">月费率9厘起</div>
         </div>
         <div class='box'>
           <div class='img img2'></div>
-          <div class='mtb18'>放款快</div>
-          <div>最快当天可放款</div>
+          <div class='mtb18 fs14'>放款快</div>
+          <div class="fontSize" v-if="showAdvantage">最快当天可放款</div>
         </div>
         <div class='box'>
           <div class='img img3'></div>
-          <div class='mtb18'>额度高</div>
-          <div>最高估值100%</div>
+          <div class='mtb18 fs14'>额度高</div>
+          <div class="fontSize" v-if="showAdvantage">最高估值100%</div>
         </div>
       </div>
     </section>
+    <!-- <div>{{p}}</div> -->
   </div>
 </template>
 
 <script>
-import mHeader from '@/components/Header'
-import { getFullDate } from '../../common/js/utils'
+// import axios from 'axios'
+// import qs from 'qs'
+import mHeader from '@/components/HeaderBackAPP'
+import { isObjectHaveNull } from '../../common/js/utils'
 import { Indicator, Toast } from 'mint-ui'
-import { queryForBrankList, queryForSeriesList, queryModelList, queryCitylList, queryCarPrice } from '../../api/index'
+import { queryForBrankList, queryForSeriesList, queryModelList, queryCitylList, queryCarPrice, visit, editApplyStatus } from '../../api/index'
 const citys = {
   province: ['北京', '上海', '四川', '天津', '吉林', '宁夏', '安徽', '山东', '山西', '广东', '广西', '新疆', '江苏', '江西', '河北', '河南', '浙江', '海南',
     '内蒙古', '湖北', '云南', '湖南', '甘肃', '福建', '西藏', '贵州', '辽宁', '重庆', '陕西', '青海', '黑龙江'
@@ -217,10 +218,36 @@ const addressList = {
     '花莲县', '台东县', '澎湖县', '基隆市', '新竹市', '台中市', '嘉义市', '台南市'
   ]
 };
+var years = ['2014', '2015', '2016', '2017']
+const months = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
 export default {
   name: 'HelloWorld',
   data() {
     return {
+      showAdvantage: true,
+      sYears: years,
+      timeSlots: [
+      ],
+      currentDate: [years[0], '01'],
+      currentYear: years[0],
+      currentMonth: months[0],
+      slotsDate: [
+        {
+          flex: 1,
+          values: ['2017'],
+          className: 'slot1',
+          textAlign: 'right'
+        }, {
+          divider: true,
+          content: '-',
+          className: 'slot2'
+        }, {
+          flex: 1,
+          values: ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'],
+          defaultIndex: 0,
+          className: 'slot3',
+          textAlign: 'left'
+        }],
       titleCity: '地区选择',
       cityPickerColumns: [
         {
@@ -249,6 +276,8 @@ export default {
         time: '',
         city: ''
       },
+      province: '',
+      city: '',
       showCarTypePop: false, // 是否显示选择品牌
       showSeriesListPop: false, // 是否显示选择系列
       showModelListPop: false, // 是否显示选择车型
@@ -260,17 +289,64 @@ export default {
       currentCityId: '',
       highPrice: '',
       carCreditId: '',
-      customerKey: 1
+      customerKey: parseInt(this.$route.query.customerKey),
+      accountTel: parseInt(this.$route.query.accountTel)
     }
   },
   created() {
+    // 用户进入页面后保存数据
+    this.visit()
+    localStorage.setItem('customerKey', this.customerKey)
+    localStorage.setItem('accountTel', this.accountTel)
+    localStorage.setItem('type', this.$route.query.type)
+    localStorage.setItem('shopId', this.$route.query.shopId)
+    localStorage.setItem('isLogin', this.$route.query.isLogin)
+    localStorage.setItem('from', this.$route.query.from)
+    console.log('===carEvaluatePage===')
+    console.log('customerKey:' + this.customerKey)
+    console.log('accountTel:' + this.accountTel)
+    // 获取车辆品牌列表
     this.queryForBrankList()
-    // this.list = [{ 'brandId': 1, 'brandName': '奥迪', 'initial': 'A', 'updateTime': null }, { 'brandId': 2, 'brandName': '阿斯顿·马丁', 'initial': 'A', 'updateTime': null }, { 'brandId': 3, 'brandName': '阿尔法·罗密欧', 'initial': 'A', 'updateTime': null }]
   },
   methods: {
-    applyBtn() {
-      this.$router.push('/applyBM')
+    visit() {
+      let params = {
+        zedAccount: this.accountTel,
+        customerKey: this.customerKey
+      }
+      visit(params).then(res => {
+        console.log(res)
+        if (res.code === 0) {
+          this.carCreditId = res.carCreditId
+          localStorage.setItem('carCreditId', this.carCreditId)
+        }
+      })
     },
+    timeChange(picker, values) {
+      let selectedDate = picker.getValues()
+      this.currentDate = selectedDate[0] + '-' + selectedDate[1]
+      // console.log(this.currentDate)
+    },
+    editApplyStatus() {
+      let params = {
+        carPriceId: this.carCreditId
+      }
+      editApplyStatus(params).then(res => {
+        console.log(res)
+      })
+    },
+    applyBtn() {
+      let params = {
+        carCreditId: this.carCreditId
+      }
+      editApplyStatus(params).then(res => {
+        console.log(res)
+        if (res.code === 0) {
+          this.$router.push('/applyBM')
+        }
+      })
+    },
+    // 获取城市列表
     queryCitylList(provName) {
       let params = {
         provName: provName
@@ -289,16 +365,6 @@ export default {
     },
     handleCityPickerChange(picker, values) {
       picker.setColumnValues(1, addressList[values[0]]);
-      // let self = this
-      // // this.queryCitylList(values[0])
-      // let params = {
-      //   provName: values[0]
-      // }
-      // queryCitylList(params).then(res => {
-      //   self.currentCityNames = res.list
-      //   console.log(self.currentCityNames)
-      //   picker.setColumnValues(1, addressList[values[0]]);
-      // })
     },
     handleCityPickerCancel() {
       this.showCityPopup = false
@@ -307,6 +373,8 @@ export default {
       this.showCityPopup = false
       this.form.city = value
       console.log(value)
+      this.province = value[0]
+      this.city = value[1]
       this.currentCityName = value[1]
       console.log(this.currentCityName)
       localStorage.setItem('city', this.currentCityName)
@@ -327,27 +395,34 @@ export default {
     },
     chooseBrand(brandId) {
       console.log(brandId)
+      // 获取车系列表
       this.queryForSeriesList(brandId)
-      // this.$router.push({name: '选择车系', params: { brandName: cell.brandName, brandId: cell.brandId }});
     },
     chooseSeries(seriesId) {
       console.log(seriesId)
+      // 获取车型列表
       this.queryModelList(seriesId)
-      // this.$router.push({name: '选择车系', params: { brandName: cell.brandName, brandId: cell.brandId }});
     },
     chooseModel(modelName, modelId, minRegYear, maxRegYear) {
-      console.log(modelName + ':' + modelId)
+      // console.log(modelName + ':' + modelId)
       this.form.carType = modelName
       this.form.modelId = modelId
       this.minRegYear = minRegYear
       this.maxRegYear = maxRegYear
-      this.minDate = new Date(Number(this.minRegYear), 1, 1)
-      this.maxDate = new Date(Number(this.maxRegYear), 1, 1)
+      let ayears = []
+      for (let i = this.minRegYear; i <= this.maxRegYear; i++) {
+        ayears.push(String(i))
+      }
+      years = ayears
+      // console.log('years:' + years)
+      this.slotsDate[0].values = years
+      this.slotsDate[2].values = months
+      this.currentYear = years[0]
+      this.currentMonth = months[0]
       this.showModelListPop = false
       this.showSeriesListPop = false
       this.showCarTypePop = false
       // this.queryModelList(seriesId)
-      // this.$router.push({name: '选择车系', params: { brandName: cell.brandName, brandId: cell.brandId }});
     },
     queryForBrankList() {
       queryForBrankList().then(res => {
@@ -378,26 +453,34 @@ export default {
       })
     },
     queryCarPrice() {
-      Indicator.open()
+      console.log('city:' + this.form.city)
+      console.log(this.city)
       let params = {
+        carCreditId: this.carCreditId,
         modelId: this.form.modelId, // 车型ID
         regDate: this.form.time, // 待估车辆的上牌时间（格式：yyyy-MM）如2012-3
         mile: this.form.mileage, // 待估车辆的公里数，单位万公里
         zone: this.currentCityId, // 城市ID
-        customerKey: this.customerKey // 臻E盾用户ID
+        customerKey: this.customerKey, // 臻E盾用户ID
+        zedAccount: this.accountTel,
+        province: this.province,
+        city: this.city
       }
-      queryCarPrice(params).then(res => {
-        console.log(res)
-        if (res.code === 0) {
-          this.highPrice = res.obj.highPrice
-          this.carCreditId = res.obj.carCreditId
-          localStorage.setItem('carPriceId', this.carCreditId)
-          this.isEvaluate = true
-        } else if (res.code === -1) {
-          Toast(res.error)
-        }
-        Indicator.close()
-      })
+      if (isObjectHaveNull(params)) {
+        Toast('所填资料不完整')
+      } else {
+        Indicator.open()
+        queryCarPrice(params).then(res => {
+          if (res.code === 0) {
+            this.highPrice = res.obj.highPrice
+            this.showAdvantage = false
+            this.isEvaluate = true
+          } else if (res.code === -1) {
+            Toast(res.error)
+          }
+          Indicator.close()
+        })
+      }
     },
     beginEvaluateEvent() {
       // begin
@@ -416,22 +499,18 @@ export default {
       this.form.carType = values[0]
     },
     timeEvent() {
-      this.showTimePopup = true;
+      if (this.form.carType) {
+        this.showTimePopup = true;
+      } else {
+        Toast('请先选择车型')
+      }
     },
     timeHandlePickerConfirm(value) {
       this.showTimePopup = false;
-      this.form.time = getFullDate(value)
+      this.form.time = this.currentDate;
     },
     cityEvent() {
       this.showCityPopup = true;
-    },
-    nextBtnEvent() {
-      let self = this
-      this.b = true
-      setTimeout(function() {
-        self.b = false
-        console.log(`b:false`)
-      }, 3000)
     }
   },
   components: {

@@ -1,4 +1,10 @@
 @import '../../common/scss/index.scss';
+@mixin bgImage($url){
+  background-image: url($url + "@2x.png");
+  @media (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3){
+    background-image: url($url + "@3x.png");
+  }
+}
 .carEvaluate{
   font-family: PingFang-SC-Medium;
   .base{
@@ -20,13 +26,13 @@
           height: 34px;
           background-size: 274px 34px;
           &.bgImg1{
-            background-image: url('../../common/images/title_tab.png');
+            @include bgImage($url:'../../common/images/apply_title_tab01');
           }
           &.bgImg2{
-            background-image: url('../../common/images/title_tab02.png');
+            @include bgImage($url:'../../common/images/apply_title_tab02');
           }
           &.bgImg3{
-            background-image: url('../../common/images/title_tab03.png');
+            @include bgImage($url:'../../common/images/apply_title_tab03');
           }
         }
         .steps_texts {
@@ -39,7 +45,7 @@
             text-align: center;
             color: #999999;
             &.active {
-              color: RGB(255, 87, 34);
+              color: $main-color;
             }
           }
         }
@@ -57,7 +63,7 @@
         margin-top: 28px;
         margin-bottom: 48px;
         display: block;
-        @include bg-image($url:'../../common/images/icon_success');
+        @include bgImage($url:'../../common/images/icon_success');
         background-repeat: no-repeat;
         background-size: 105px 65px; 
       }
@@ -83,20 +89,6 @@
       .myCellWrapper {
         @include cell();
         @include border-1px();
-      }
-      // .beginBtn{
-      //   width: 100px;
-      //   margin: 20px auto;
-      //   display: block;
-      // }
-      .beginEvaluateBtn{
-        width: 84px;
-        height: 84px;
-        margin: 20px auto;
-        display: block;
-        @include bg-image($url:'../../common/images/apply_btn_begin');
-        background-repeat: no-repeat;
-        background-size: 84px 84px; 
       }
       .btnWrapper {
         text-align: center;
@@ -138,13 +130,13 @@
             background-repeat: no-repeat;
             background-size: 38px 38px;
             &.img1{
-              @include bg-image($url:'../../common/images/icon_rate');
+              @include bgImage($url:'../../common/images/icon_rate');
             }
             &.img2{
-              @include bg-image($url:'../../common/images/icon_quick');
+              @include bgImage($url:'../../common/images/icon_quick');
             }
             &.img3{
-              @include bg-image($url:'../../common/images/icon_limit');
+              @include bgImage($url:'../../common/images/icon_limit');
             }
           }
         }
@@ -187,7 +179,7 @@
             display: block;
             background-repeat: no-repeat;
             background-size: 93px 53px;
-            @include bg-image($url:'../../common/images/logo_wdw');
+            @include bgImage($url:'../../common/images/logo_wdw');
           }
         }
       }

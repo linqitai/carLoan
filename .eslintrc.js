@@ -25,6 +25,7 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0, 
     // 一行结尾可使用分号
     "semi": 0,
+    "no-undef": 0,
     // space-before-function-paren 
     'space-before-function-paren': 0
   }

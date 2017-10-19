@@ -1,61 +1,46 @@
 <template>
   <header>
-    <div class="backImg" @click="back">
+    <div class="back-img" @click="back">
     </div>
     <div class="text">
       <slot></slot>
+    </div>
+    <div class="logo">
     </div>
   </header>
 </template>
 <script>
 export default {
+  data() {
+    return {
+      type: this.$route.query.type,
+      shopId: this.$route.query.shopId,
+      isLogin: this.$route.query.isLogin,
+      customerKey: this.$route.query.customerKey,
+      accountTel: this.$route.query.accountTel,
+      from: this.$route.query.from
+    }
+  },
   methods: {
     back() {
-      console.log('back')
-      var ws = plus.webview.currentWebview()
-      plus.webview.close(ws)
       // this.$router.go(-1)
-      // let ua = navigator.userAgent.toLowerCase()
-      // if (/iphone|ipad|ipod/.test(ua)) {
-      //   console.log('iphone')
-      //   popToViewController()
-      // } else if (/android/.test(ua)) {
-      //   console.log('android')
-      //   htmlToJava.popToViewController()
-      // }
-      // console.log('back')
-    },
-    helpEvent() {
-      this.$router.push('/help')
+      // window.location.href = `http://fq.51puhui.cn/hk/zyd/dist/#/financing?type=${this.type}&shopId=${this.shopId}&isLogin=${this.isLogin}&customerKey=${this.customerKey}&accountTel=${this.accountTel}`
+      if (this.from === 'app') {
+        // h5返回安卓或是返回IOS
+        let ua = navigator.userAgent.toLowerCase()
+        if (/iphone|ipad|ipod/.test(ua)) {
+          popToViewController()
+        } else if (/android/.test(ua)) {
+          htmlToJava.popToViewController()
+        }
+      } else {
+        window.location.href = `http://fq.51puhui.cn/hk/zyd/dist/#/financing?type=${this.type}&shopId=${this.shopId}&isLogin=${this.isLogin}&customerKey=${this.customerKey}&accountTel=${this.accountTel}`
+      }
     }
   }
 }
 </script>
 <style lang="scss" scoped>
-@import '../common/scss/mixin.scss';
-header {
-  @include border($color: #c7c7c7);
-  @include topHeader();
-  width: 100%;
-  height: 44px;
-  font-size: 18px;
-  color: #323232;
-  background-color: #ffffff;
-  .text {
-    width: 100%;
-    line-height: 44px;
-    text-align: center;
-  }
-  .backImg {
-    width: 10px;
-    height: 17px;
-    background-image: url('../common/images/btn_back.png');
-    background-size: 100% 100%;
-    @include extend-click();
-    position: absolute;
-    top: 14px;
-    left: 15px;
-  }
-}
+@import './header.scss'
 </style>
 

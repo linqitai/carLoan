@@ -1,6 +1,6 @@
 <template>
   <div class="carEvaluate">
-    <m-header>申请借款</m-header>
+    <m-header>臻车贷</m-header>
     <div class="steps_wrapper">
       <div class="steps">
         <div class="steps_icon bgImg2"></div>
@@ -33,7 +33,7 @@
       <div class="myCellWrapper border-1px">
         <div class="title">联系方式</div>
         <div class="value">
-          <input type="text" v-model="form.mobile" placeholder="请输入联系方式" maxlength="11">
+          <input type="tel" v-model="form.mobile" placeholder="请输入联系方式" maxlength="11">
         </div>
         <div class="clear" @click="form.mobile=''" v-show="form.mobile">
           <van-icon name="clear" />
@@ -49,18 +49,20 @@
         </div>
       </div>
       <van-popup v-model="showPlatFormPop" position="bottom" class="van-popup-2">
-        <van-picker v-model="form.platform" :title="title" :columns="pickerColumns" show-toolbar @cancel="handlePickerCancel" @confirm="handlePickerConfirm"></van-picker>
+        <van-picker v-model="form.platform" :title="titlePlatForm" :columns="pickerColumns" show-toolbar @cancel="handlePickerCancel" @confirm="handlePickerConfirm"></van-picker>
         </van-datetime-picker>
       </van-popup>
+    </section>
+    <section class="btnBox">
       <div class="btnWrapper">
-        <button class="next_step_btn bg_corlor_orange" ref="next_step_btn" @click="submitApplyBtn">提交申请</button>
+        <button class="next_step_btn bg_color_green" ref="next_step_btn" @click="submitApplyBtn">提交申请</button>
       </div>
     </section>
     <section class="cooperationPlatWrapper">
       <div class="title">合作平台</div>
       <div class="content">
         <div class="box flex1">
-          <div class="img img1"></div>
+          <div class="img"></div>
         </div>
         <div class="box flex2">
           <div class="left">1.国资企业强势入股</div>
@@ -74,8 +76,9 @@
 
 <script>
 import mHeader from '@/components/Header';
-import { Toast } from 'mint-ui'
+import { Indicator, Toast } from 'mint-ui'
 import { submitApply } from '../../api/index'
+import { checkPhone, isObjectHaveNull } from '../../common/js/utils'
 export default {
   name: 'HelloWorld',
   data() {
@@ -86,11 +89,12 @@ export default {
         name: '',
         identity: '',
         mobile: '',
-        platform: '',
+        platform: '微贷网',
         platformId: ''
       },
       showPlatFormPop: false,
       title: '选择车型',
+      titlePlatForm: '平台选择',
       pickerColumns: [
         {
           values: ['微贷网'],
@@ -106,28 +110,36 @@ export default {
       let params = {
         name: this.form.name,
         mobile: this.form.mobile,
-        craNum: this.form.identity,
+        carNum: this.form.identity,
         pushPlatformType: '',
-        carPriceId: localStorage.getItem('carPriceId'),
+        carCreditId: localStorage.getItem('carCreditId'),
         city: localStorage.getItem('city')
       }
       console.log(localStorage.getItem('city'))
       if (this.form.platform === '微贷网') {
         params.pushPlatformType = 1
       }
-      submitApply(params).then(res => {
-        console.log(params)
-        console.log(res)
-        if (res.code === 0) {
-          // res
-        } else if (res.code === -1) {
-          // aaa
-          Toast(res.error)
+      if (isObjectHaveNull(params)) {
+        Toast('所填资料不完整')
+      } else {
+        Indicator.open()
+        if (checkPhone(this.form.mobile)) {
+          submitApply(params).then(res => {
+            console.log(params)
+            console.log(res)
+            if (res.code === 0) {
+              this.$router.push('/offlineManage')
+            } else if (res.code === -1) {
+              Toast(res.error)
+            }
+            Indicator.close()
+          })
+        } else {
+          Toast('不存在此手机号码')
         }
-      })
+      }
     },
     submitApplyBtn() {
-      // begin
       this.submitApply()
     },
     carTypeEvent() {
