@@ -124,7 +124,7 @@
     .beginEvaluateBtn{
       width: 96px;
       height: 86px;
-      margin: 0px auto;
+      margin: 5px auto 0 auto;
       display: block;
       // @include bgImage($url:'./apply_btn_begin');
       background-image: url("http://static.hpbanking.com/xg/uploads/files/426e20428c984e0b968443458fb5a653-222-230.png");
@@ -136,8 +136,8 @@
     }
     .btnWrapper {
       text-align: center;
-      margin-top: 16px;
-      margin-bottom: 16px;
+      margin-top: 20px;
+      margin-bottom: 20px;
       .amount{
         color: $main-color;
         font-size: 24px;
@@ -187,7 +187,6 @@
   .cooperationPlatWrapper{
     padding-left: 16px;
     padding-right: 16px;
-    margin-top: 26px;
     .title{
       border-left: 3px solid $main-color;
       padding-left: 10px;
@@ -195,8 +194,7 @@
     .content{
       display: flex;
       background-color: #ffffff;
-      margin-top: 20px;
-      margin-bottom: 30px;
+      margin-top: 12px;
       .box{
         text-align: center;
         font-size: 12px;

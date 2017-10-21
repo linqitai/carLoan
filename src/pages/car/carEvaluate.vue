@@ -114,7 +114,7 @@
       <div class='myCellWrapper border-1px'>
         <div class='title'>行驶里程</div>
         <div class='value'>
-          <input type='text' v-model='form.mileage' placeholder='请输入行驶里程(万公里)'>
+          <input type='number' v-model='form.mileage' placeholder='请输入行驶里程(万公里)'>
         </div>
         <div class='clear' @click="form.mileage=''" v-show='form.mileage'>
           <van-icon name='clear' />
