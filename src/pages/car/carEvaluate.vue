@@ -467,7 +467,7 @@ export default {
         city: this.city
       }
       if (isObjectHaveNull(params)) {
-        Toast('所填资料不完整')
+        Toast('信息不完整')
       } else {
         Indicator.open()
         queryCarPrice(params).then(res => {
