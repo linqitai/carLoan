@@ -55,9 +55,6 @@
               </mt-cell>
             </span>
           </mt-index-section>
-          <!-- <template v-for='(item, index) in seriesList'>
-                                                                                          <div class="selectTitle border-1px" :key="index" @click="chooseSeries(item.seriesId)">{{item.seriesName}}</div>
-                                                                                        </template> -->
         </mt-index-list>
       </van-popup>
       <!-- 选择车型POPUP -->
@@ -112,9 +109,9 @@
         </van-datetime-picker>
       </van-popup>
       <div class='myCellWrapper border-1px'>
-        <div class='title'>行驶里程</div>
+        <div class='titleMore'>行驶里程/万公里</div>
         <div class='value'>
-          <input type='number' v-model='form.mileage' placeholder='请输入行驶里程(万公里)'>
+          <input type='number' v-model='form.mileage' placeholder='请输入行驶里程'>
         </div>
         <div class='clear' @click="form.mileage=''" v-show='form.mileage'>
           <van-icon name='clear' />
@@ -129,7 +126,7 @@
         <div>车辆评估价：
           <span class='amount'>{{highPrice}}万</span>
         </div>
-        <button class='next_step_btn bg_color_green mt24' ref='next_step_btn' @click='applyBtn($event)'>申请借款</button>
+        <button class='next_step_btn bg_color_green mt24' ref='next_step_btn' @click='applyBtn'>申请借款</button>
       </div>
     </section>
     <section class='advantageWrapper'>
@@ -334,6 +331,9 @@ export default {
       editApplyStatus(params).then(res => {
         console.log(res)
       })
+    },
+    applyBtnTest() {
+      this.$router.push('/applyBM')
     },
     applyBtn() {
       let params = {
