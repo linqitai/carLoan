@@ -1,6 +1,7 @@
 <template>
   <div class='carEvaluate'>
     <m-header>臻车贷</m-header>
+    <div class="base">
     <div class='steps_wrapper'>
       <div class='steps'>
         <div class='steps_icon bgImg1'></div>
@@ -55,9 +56,6 @@
               </mt-cell>
             </span>
           </mt-index-section>
-          <!-- <template v-for='(item, index) in seriesList'>
-                                                                                          <div class="selectTitle border-1px" :key="index" @click="chooseSeries(item.seriesId)">{{item.seriesName}}</div>
-                                                                                        </template> -->
         </mt-index-list>
       </van-popup>
       <!-- 选择车型POPUP -->
@@ -123,7 +121,7 @@
     </section>
     <section class="btnBox">
       <!-- 开始评估按钮 -->
-      <div class='beginEvaluateBtn' v-show='!isEvaluate' @click='beginEvaluateEvent'></div>
+      <div class='beginEvaluateBtn' v-show='!isEvaluate' @click='beginEvaluateEvent1'></div>
 
       <div class='btnWrapper' v-show='isEvaluate'>
         <div>车辆评估价：
@@ -152,7 +150,7 @@
         </div>
       </div>
     </section>
-    <!-- <div>{{p}}</div> -->
+    </div>
   </div>
 </template>
 
@@ -467,7 +465,7 @@ export default {
         city: this.city
       }
       if (isObjectHaveNull(params)) {
-        Toast('所填资料不完整')
+        Toast('信息不完整')
       } else {
         Indicator.open()
         queryCarPrice(params).then(res => {
@@ -481,6 +479,9 @@ export default {
           Indicator.close()
         })
       }
+    },
+    beginEvaluateEvent1() {
+      this.$router.push('/applyBM')
     },
     beginEvaluateEvent() {
       // begin
