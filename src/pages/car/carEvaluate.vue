@@ -426,7 +426,7 @@ export default {
     },
     queryForBrankList() {
       queryForBrankList().then(res => {
-        console.log(res)
+        // console.log(res)
         this.list = res.list
       })
     },
@@ -435,7 +435,7 @@ export default {
         brankId: brandId
       }
       queryForSeriesList(params).then(res => {
-        console.log(res)
+        // console.log(res)
         this.showSeriesListPop = true
         this.seriesList = res.list
         // console.log(res.list[0])
@@ -447,13 +447,13 @@ export default {
         seriesId: seriesId
       }
       queryModelList(params).then(res => {
-        console.log(res)
+        // console.log(res)
         this.showModelListPop = true
         this.modelList = res.list
       })
     },
     queryCarPrice() {
-      console.log('city:' + this.form.city)
+      // console.log('city:' + this.form.city)
       console.log(this.city)
       let params = {
         carCreditId: this.carCreditId,
@@ -469,17 +469,21 @@ export default {
       if (isObjectHaveNull(params)) {
         Toast('信息不完整')
       } else {
-        Indicator.open()
-        queryCarPrice(params).then(res => {
-          if (res.code === 0) {
-            this.highPrice = res.obj.highPrice
-            this.showAdvantage = false
-            this.isEvaluate = true
-          } else if (res.code === -1) {
-            Toast(res.error)
-          }
-          Indicator.close()
-        })
+        if (params.mile > 100) {
+          Toast('行驶里程不能大于100万公里')
+        } else {
+          Indicator.open()
+          queryCarPrice(params).then(res => {
+            if (res.code === 0) {
+              this.highPrice = res.obj.highPrice
+              this.showAdvantage = false
+              this.isEvaluate = true
+            } else if (res.code === -1) {
+              Toast(res.error)
+            }
+            Indicator.close()
+          })
+        }
       }
     },
     beginEvaluateEvent() {

@@ -1,35 +1,35 @@
 @import '../common/scss/mixin.scss';
 @import '../common/scss/common.scss';
 header {
-  @include border-1px();
-  @include topHeader();
-  width: 100%;
-  height: 44px;
-  font-size: 18px;
-  color: #ffffff;
-  background-color: $main-color;
-  .text {
+    @include border-1px();
+    @include topHeader();
     width: 100%;
-    line-height: 44px;
-    text-align: center;
-  }
-  .back-img {
-    width: 22px;
-    height: 22px;
-    background-image: url('../common/images/btn_back_white.png');
-    background-size: 100% 100%;
-    @include extend-click();
-    position: absolute;
-    top: 11px;
-    left: 15px;
-  }
-  .logo{
-    width: 26px;
-    height: 26px;
-    background-image: url('../common/images/logo.png');
-    background-size: 100% 100%;
-    position: absolute;
-    top: 0px;
-    right: 15px;
-  }
+    height: 44px;
+    font-size: 18px;
+    color: #ffffff;
+    background-color: $main-color;
+    .text {
+        width: 100%;
+        line-height: 44px;
+        text-align: center;
+    }
+    .back-img {
+        width: 22px;
+        height: 22px;
+        background-image: url('../common/images/btn_back_white.png');
+        background-size: 100% 100%;
+        @include extend-click();
+        position: absolute;
+        top: 11px;
+        left: 15px;
+    }
+    .logo {
+        width: 26px;
+        height: 26px;
+        background-image: url('../common/images/logo.png');
+        background-size: 100% 100%;
+        position: absolute;
+        top: 0px;
+        right: 15px;
+    }
 }

@@ -73,7 +73,7 @@
       margin-top: 20px;
       margin-bottom: 20px;
       .next_step_btn {
-        @include btn($width: 150px);
+        @include btn($width: 120px);
       }
     }
   }
@@ -153,6 +153,7 @@
     .title{
       border-left: 3px solid $main-color;
       padding-left: 10px;
+      margin-top: 8px;
     }
     .content{
       display: flex;
@@ -187,6 +188,7 @@
   .cooperationPlatWrapper{
     padding-left: 16px;
     padding-right: 16px;
+    padding-top: 8px;
     .title{
       border-left: 3px solid $main-color;
       padding-left: 10px;

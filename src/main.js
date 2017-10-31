@@ -11,7 +11,7 @@ import 'muse-ui/dist/muse-ui.css';
 import 'mint-ui/lib/style.css';
 import 'vant/lib/vant-css/index.css';
 import fastclick from 'fastclick'
-import './common/scss/common.scss';
+import './common/scss/reset.scss';
 // @import '../../common/scss/common.scss';
 fastclick.attach(document.body)
 
