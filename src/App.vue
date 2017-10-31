@@ -6,7 +6,22 @@
 
 <script>
 export default {
-  name: 'app'
+  data () {
+    return {
+      transitionName: 'slide-left' // localStorage.getItem('isBack') ? 'slide-right' :
+    }
+  },
+  beforeRouteUpdate (to, from, next) {
+    let isBack = this.$router.isBack
+    console.log('isBack:' + isBack)
+    if (isBack) {
+      this.transitionName = 'slide-right'
+    } else {
+      this.transitionName = 'slide-left'
+    }
+    this.$router.isBack = false
+    next()
+  }
 }
 </script>
 
