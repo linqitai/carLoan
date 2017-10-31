@@ -10,6 +10,7 @@
   .mint-cell-wrapper{
     background-image: none;
   }
+<<<<<<< HEAD
   .base{
     position: fixed;
     top: 44px;
@@ -36,6 +37,27 @@
           &.bgImg3{
             @include bgImage($url:'../../common/images/apply_title_tab03');
           }
+=======
+  .steps_wrapper {
+    background-color: #ffffff;
+    padding-top: 54px;
+    padding-bottom: 10px;
+    .steps {
+      font-size: 0;
+      .steps_icon {
+        margin: 0 auto;
+        width: 274px;
+        height: 34px;
+        background-size: 274px 34px;
+        &.bgImg1{
+          @include bgImage($url:'../../common/images/apply_title_tab01');
+        }
+        &.bgImg2{
+          @include bgImage($url:'../../common/images/apply_title_tab02');
+        }
+        &.bgImg3{
+          @include bgImage($url:'../../common/images/apply_title_tab03');
+>>>>>>> 4199c8ad1b4f496aa808c1fc3f476444fc98c102
         }
         .steps_texts {
           margin: 0 auto;

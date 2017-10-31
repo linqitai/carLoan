@@ -1,8 +1,12 @@
 <template>
   <div id="app">
+<<<<<<< HEAD
     <transition :name="transitionName">
       <router-view class="child-view"></router-view>
     </transition>
+=======
+      <router-view/>
+>>>>>>> 4199c8ad1b4f496aa808c1fc3f476444fc98c102
   </div>
 </template>
 
@@ -33,6 +37,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
+<<<<<<< HEAD
 }
 .child-view {
   position: absolute;
@@ -48,5 +53,7 @@ export default {
   opacity: 0;
   -webkit-transform: translate(-100%, 0);
   transform: translate(-100%, 0);
+=======
+>>>>>>> 4199c8ad1b4f496aa808c1fc3f476444fc98c102
 }
 </style>
