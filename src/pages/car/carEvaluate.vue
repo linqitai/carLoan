@@ -1,6 +1,7 @@
 <template>
   <div class='carEvaluate'>
     <m-header>臻车贷</m-header>
+    <div class="base">
     <div class='steps_wrapper'>
       <div class='steps'>
         <div class='steps_icon bgImg1'></div>
@@ -55,9 +56,6 @@
               </mt-cell>
             </span>
           </mt-index-section>
-          <!-- <template v-for='(item, index) in seriesList'>
-                                                                                          <div class="selectTitle border-1px" :key="index" @click="chooseSeries(item.seriesId)">{{item.seriesName}}</div>
-                                                                                        </template> -->
         </mt-index-list>
       </van-popup>
       <!-- 选择车型POPUP -->
@@ -112,9 +110,9 @@
         </van-datetime-picker>
       </van-popup>
       <div class='myCellWrapper border-1px'>
-        <div class='title'>行驶里程</div>
+        <div class='titleMore'>行驶里程/万公里</div>
         <div class='value'>
-          <input type='number' v-model='form.mileage' placeholder='请输入行驶里程(万公里)'>
+          <input type='number' v-model='form.mileage' placeholder='请输入行驶里程'>
         </div>
         <div class='clear' @click="form.mileage=''" v-show='form.mileage'>
           <van-icon name='clear' />
@@ -123,13 +121,13 @@
     </section>
     <section class="btnBox">
       <!-- 开始评估按钮 -->
-      <div class='beginEvaluateBtn' v-show='!isEvaluate' @click='beginEvaluateEvent'></div>
+      <div class='beginEvaluateBtn' v-show='!isEvaluate' @click='beginEvaluateEvent1'></div>
 
       <div class='btnWrapper' v-show='isEvaluate'>
         <div>车辆评估价：
           <span class='amount'>{{highPrice}}万</span>
         </div>
-        <button class='next_step_btn bg_color_green mt24' ref='next_step_btn' @click='applyBtn($event)'>申请借款</button>
+        <button class='next_step_btn bg_color_green mt24' ref='next_step_btn' @click='applyBtn'>申请借款</button>
       </div>
     </section>
     <section class='advantageWrapper'>
@@ -152,7 +150,7 @@
         </div>
       </div>
     </section>
-    <!-- <div>{{p}}</div> -->
+    </div>
   </div>
 </template>
 
@@ -335,6 +333,9 @@ export default {
         console.log(res)
       })
     },
+    applyBtnTest() {
+      this.$router.push('/applyBM')
+    },
     applyBtn() {
       let params = {
         carCreditId: this.carCreditId
@@ -467,7 +468,7 @@ export default {
         city: this.city
       }
       if (isObjectHaveNull(params)) {
-        Toast('所填资料不完整')
+        Toast('信息不完整')
       } else {
         Indicator.open()
         queryCarPrice(params).then(res => {
@@ -481,6 +482,9 @@ export default {
           Indicator.close()
         })
       }
+    },
+    beginEvaluateEvent1() {
+      this.$router.push('/applyBM')
     },
     beginEvaluateEvent() {
       // begin

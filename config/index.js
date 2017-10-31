@@ -27,7 +27,7 @@ module.exports = {
   },
   dev: {
     env: require('./dev.env'),
-    port: 8088,
+    port: 8082,
     autoOpenBrowser: true,
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
@@ -36,7 +36,8 @@ module.exports = {
         // target:'http://192.168.18.170:8061',// 义良
         // target:'http://192.168.18.218:8061',// 张胜
         // target: 'http://192.168.18.220:8061',// 修庆
-        target:'http://192.168.18.177:8030',// 子涵
+        // target:'http://192.168.18.177:8030',// 子涵
+        target:'http://121.199.33.100:8030',// 线上
         changeOrigin: true,
         pathRewrite: {
         '^/rz': ''
