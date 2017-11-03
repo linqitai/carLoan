@@ -57,7 +57,7 @@
       </section>
       <section class="btnBox">
         <div class="btnWrapper">
-          <button class="next_step_btn bg_color_green" ref="next_step_btn" @click="submitApplyBtn">提交申请</button>
+          <button class="next_step_btn bg_color_green" ref="next_step_btn" @click="submitApplyBtn">提交</button>
         </div>
       </section>
       <section class="cooperationPlatWrapper">
@@ -79,7 +79,7 @@
 
 <script>
 import mHeader from '@/components/Header';
-import { Indicator, Toast } from 'mint-ui'
+import { Toast } from 'mint-ui'
 import { submitApply } from '../../api/index'
 import { checkPhone, checkIdentity } from '../../common/js/utils'
 export default {
@@ -139,16 +139,13 @@ export default {
         inputs[2].focus()
         return
       }
-      Indicator.open()
       submitApply(params).then(res => {
         if (res.code === 0) {
           this.$router.push('/offlineManage')
         } else if (res.code === -1) {
           Toast('资料提交错误或重复提交')
         }
-        Indicator.close()
       })
-      Indicator.close()
     },
     submitApplyBtn() {
       this.submitApply()

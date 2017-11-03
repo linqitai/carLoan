@@ -5,8 +5,8 @@
     <div class="text">
       <slot></slot>
     </div>
-    <div class="logo">
-    </div>
+    <!--<div class="logo">
+    </div>-->
   </header>
 </template>
 <script>

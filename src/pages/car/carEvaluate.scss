@@ -8,21 +8,65 @@
 
 .carEvaluate {
   font-family: PingFang-SC-Medium;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  header {
+    @include border-1px();
+    @include topHeader();
+    width: 100%;
+    height: 44px;
+    font-size: 18px;
+    color: #ffffff;
+    background-color: $main-color;
+    .text {
+      width: 100%;
+      line-height: 44px;
+      text-align: center;
+    }
+    .back-img {
+      width: 22px;
+      height: 22px;
+      background-image: url('../../common/images/btn_back_white.png');
+      background-size: 100% 100%;
+      @include extend-click();
+      position: absolute;
+      top: 11px;
+      left: 15px;
+    }
+    .logo {
+      width: 26px;
+      height: 26px;
+      background-image: url('../../common/images/logo.png');
+      background-size: 100% 100%;
+      position: absolute;
+      top: 0px;
+      right: 15px;
+    }
+  }
   .mint-cell-wrapper {
     background-image: none;
   }
   .btnBox {
     .beginEvaluateBtn {
-      width: 96px;
-      height: 86px;
-      margin: 5px auto 0 auto;
+      width: 58px;
+      height: 58px;
+      line-height: 58px;
+      color: #ffffff;
+      margin: 12px auto 0 auto;
       display: block; // @include bgImage($url:'./apply_btn_begin');
-      background-image: url("http://static.hpbanking.com/xg/uploads/files/426e20428c984e0b968443458fb5a653-222-230.png");
-      @media (-webkit-min-device-pixel-ratio: 3), (min-device-pixel-ratio: 3) {
-        background-image: url("http://static.hpbanking.com/xg/uploads/files/975ab0a618ac4faf2c198b39bf224a8c-333-345.png");
-      }
-      background-repeat: no-repeat;
-      background-size: 104px 104px;
+      background-color: #01ab94;
+      border-radius: 44px;
+      text-align: center;
+      font-size: 16px;
+      font-family: Arial, Helvetica, sans-serif; // background-image: url("http://static.hpbanking.com/xg/uploads/files/426e20428c984e0b968443458fb5a653-222-230.png");
+      // @media (-webkit-min-device-pixel-ratio: 3), (min-device-pixel-ratio: 3) {
+      //   background-image: url("http://static.hpbanking.com/xg/uploads/files/975ab0a618ac4faf2c198b39bf224a8c-333-345.png");
+      // }
+      // background-repeat: no-repeat;
+      // background-size: 98px 98px;
     }
     .btnWrapper {
       text-align: center;
@@ -91,23 +135,25 @@
       padding: 0px 12px;
       height: 44px;
       line-height: 44px;
+      @include topHeader();
       @include border-1px();
       width: 100%;
       font-size: 18px;
       color: #323232;
-      background-color: #ffffff;
+      background-color: $main-color;
       .text {
         line-height: 44px;
         text-align: center;
+        color: #ffffff;
       }
       .back-img {
-        width: 10px;
-        height: 17px;
-        background-image: url('../../common/images/btn_back.png');
+        width: 22px;
+        height: 22px;
+        background-image: url('../../common/images/btn_back_white.png');
         background-size: 100% 100%;
         @include extend-click();
         position: absolute;
-        top: 14px;
+        top: 10px;
         left: 15px;
       }
     }
@@ -115,9 +161,11 @@
   .advantageWrapper {
     padding-left: 16px;
     padding-right: 16px;
+    padding-top: 8px;
     .title {
-      border-left: 3px solid $main-color;
-      padding-left: 10px;
+      // border-left: 3px solid $main-color;
+      // padding-left: 10px;
+      font-size: 14px;
     }
     .content {
       display: flex;
@@ -154,7 +202,9 @@
     padding-right: 16px;
     .title {
       border-left: 3px solid $main-color;
-      padding-left: 10px;
+      padding-left: 5px;
+      font-size: 13px;
+      line-height: 12px;
     }
     .content {
       display: flex;

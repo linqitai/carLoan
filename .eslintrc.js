@@ -31,6 +31,8 @@ module.exports = {
         "no-undef": 0,
         // space-before-function-paren 
         'space-before-function-paren': 0,
-        'indent': 0
+        'indent': 0,
+        'no-unused-vars': 0,
+        'no-trailing-spaces': 0
     }
 }

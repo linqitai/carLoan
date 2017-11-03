@@ -23,7 +23,7 @@ export const queryCitylList = (params) => {
 }
 // 车辆评估
 export const queryCarPrice = (params) => {
-  return http.fetchPost(root + '/m/filter/cheCredit/queryCarPrice.json', params)
+  return http.fetchPostPrimary(root + '/m/filter/cheCredit/queryCarPrice.json', params)
 }
 // 修改申请状态
 export const editApplyStatus = (params) => {
@@ -32,4 +32,8 @@ export const editApplyStatus = (params) => {
 // 提交申请
 export const submitApply = (params) => {
   return http.fetchPost(root + '/m/filter/cheCredit/submitApply.json', params)
+}
+// 提交申请
+export const dataCache = (params) => {
+  return http.fetchPostPrimary(root + '/m/filter/cheCredit/dataCache.json', params)
 }
