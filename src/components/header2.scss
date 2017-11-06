@@ -1,5 +1,4 @@
-@import '../common/scss/mixin.scss';
-@import '../common/scss/common.scss';
+@import '../common/scss/index.scss';
 header {
     @include border-1px();
     @include topHeader();
@@ -17,6 +16,7 @@ header {
         background-position: 13px 13px;
         @include extend-click();
         position: absolute;
+        padding-right: 10px;
         .text {
             width: 100%;
             line-height: 44px;

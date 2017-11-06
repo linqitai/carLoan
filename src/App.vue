@@ -34,12 +34,15 @@ export default {
 }
 .van-picker__cancel, .van-picker__confirm {
   color: #797979 !important;
-  font-size: 15px;
+  font-size: 15px !important;
 }
 .van-picker__title{
   color: #00917e !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+}
+.van-picker-column__item{
   font-size: 15px;
-  font-weight: 600;
 }
 .van-picker-column__item--selected{
   color: #00917e !important;

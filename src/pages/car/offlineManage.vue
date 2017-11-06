@@ -66,7 +66,7 @@ export default {
   methods: {
     submitApply() {
       // window.location.href = `http://114.55.32.138/bigData/cdd/dist/#/carEvaluate?customerKey=${this.customerKey}&type=${this.type}&shopId=${this.shopId}&isLogin=${this.isLogin}&accountTel=${this.accountTel}`
-      this.$router.push(`/carEvaluate?customerKey=${this.customerKey}&type=${this.type}&shopId=${this.shopId}&isLogin=${this.isLogin}&accountTel=${this.accountTel}&from=${this.from}`)
+      this.$router.push(`/carEvaluate?customerKey=${this.customerKey}&type=${this.type}&shopId=${this.shopId}&isLogin=${this.isLogin}&accountTel=${this.accountTel}&from=${this.from}&second=1`)
     },
     carTypeEvent() {
       this.showPlatFormPop = true;

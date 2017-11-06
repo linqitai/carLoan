@@ -15,11 +15,10 @@
       background-color: #ffffff;
       z-index: 100;
       border-bottom: 1px solid #c7c7c7;
-      // box-shadow: 1px 1px 1px #888888;
       span{
         float: left;
         display: block;
-        color: #008B45;
+        color: #646464;
         font-size: 12px;
         height: 20px;
         line-height: 24px;
@@ -27,32 +26,30 @@
         margin-right: 3px;
         margin-top: 5px;
         border-radius: 3px;
-        border: 1px solid #008B45;
         &:last-child{
           margin-right: 0px;
+        }
+        &.current{
+          color: $mainColor2 !important;
+          font-weight: 600;
         }
       }
     }
     .items {
       font-size: 14px;
       .title {
-        // border-left: 2px solid #008B45;
         padding: 4px 18px;
         background-color: #c7c7c7;
         color: #ffffff;
         font-size: 13px;
       }
       .item {
-        color: #797979;
+        color: #5D5D5D;
         height: 40px;
         line-height: 40px;
         text-align: left;
         padding-left: 18px;
-        @include border1pxBottom($color: #c7c7c7); // &:last-child{
-        //   &:after {
-        //     height: 0px;
-        //   }
-        // }
+        @include border1pxBottom($color: #c7c7c7); 
       }
     }
   }

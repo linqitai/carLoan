@@ -1,3 +1,4 @@
+@import './common.scss';
 @mixin border($color) {
   border: none;
   &:after {
@@ -67,6 +68,10 @@
     right: -10px;
     bottom: -10px;
   }
+  &:active{
+    border-radius: $borderRadius;
+    background-color: rgba(17, 175, 153, .6)
+  }
 }
 
 @mixin main-color() {
@@ -74,7 +79,8 @@
 }
 
 @mixin btn($width) {
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
   width: 80px;
   height: 35px;
   line-height: 35px;

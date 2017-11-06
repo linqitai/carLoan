@@ -1,0 +1,23 @@
+@import '../../common/scss/index.scss';
+.help {
+  font-family: PingFang-SC-Medium;
+  background-color: #ffffff;
+  border: none;
+  .base {
+    position: absolute;
+    top: 44px;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    .content {
+      font-size: 13px;
+      line-height: 20px;
+      padding: 14px 12px 20px 12px;
+      color: #8A8A8A;
+      .title {
+        font-size: 13px;
+        color: $mainColor2;
+      }
+    }
+  }
+}

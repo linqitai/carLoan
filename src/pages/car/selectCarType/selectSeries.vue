@@ -3,8 +3,8 @@
     <m-header>选择车系</m-header>
     <div class="base" ref="base">
       <div class="searchBox" v-if="isShowSearchBox">
-        <template v-for="item in seriesGroupNames">
-          <span @click="queryCarSeries(item)">{{item}}</span>
+        <template v-for="(item, index) in seriesGroupNames">
+          <span @click="queryCarSeries(item, index)" :class="{'current':type===index}">{{item}}</span>
         </template>
       </div>
       <div class='items' ref="items" v-for='(item, index) in seriesList'>
@@ -24,14 +24,17 @@ export default {
       seriesList: [],
       brandId: this.$route.query.brandId,
       seriesGroupNames: '',
-      isShowSearchBox: false
+      isShowSearchBox: false,
+      type: 0
     }
   },
   created() {
     this.queryForSeriesListByBrandId(this.brandId)
   },
   methods: {
-    queryCarSeries(item) {
+    queryCarSeries(item, index) {
+      this.type = index
+      // e.target.class
       if (item === '全部') {
         this.queryForSeriesListByName('', this.brandId)
       } else {

@@ -93,7 +93,9 @@
 .mt10 {
   margin-top: 10px;
 }
-
+.mt12 {
+  margin-top: 12px;
+}
 .mt24 {
   margin-top: 24px;
 }
@@ -126,7 +128,8 @@
   float: left;
 }
 
-// 溢出省略号
+$borderRadius: 3px;
 $main-color:#00917e;
+$mainColor2:#00A251;
 $mainColorBlue:#2D6DEB;
 $main-bg-color:#f5f5f5;

@@ -19,7 +19,7 @@ export const queryModelList = (params) => {
 }
 // 城市列表
 export const queryCitylList = (params) => {
-  return http.fetchPost(root + '/m/filter/cheCredit/queryCitylList.json', params)
+  return http.fetchPostPrimary(root + '/m/filter/cheCredit/queryCitylList.json', params)
 }
 // 车辆评估
 export const queryCarPrice = (params) => {

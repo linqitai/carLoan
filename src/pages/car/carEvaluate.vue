@@ -7,8 +7,10 @@
       <div class="text">
         臻车贷
       </div>
-      <!--<div class="logo">
-      </div>-->
+      <div class="logo" @click="toHelpPage">
+        <!--<img src="../../common/images/helpIcon.png">-->
+        <mu-icon value="help_outline" :size="22" color="#efeff4"/>
+      </div>
     </header>
     <div class="base" id="base">
       <div class='steps_wrapper'>
@@ -25,7 +27,7 @@
         <div class='myCellWrapper border-1px' @click='carTypeEvent'>
           <div class='title'>选择车型</div>
           <div class='value'>
-            <input type='text' v-model='form.carType' placeholder='未选择' readonly>
+            <input class="selectCarType" type='text' v-model='form.carType' placeholder='未选择' readonly>
           </div>
           <div class='clear'>
             <van-icon name='arrow' />
@@ -80,11 +82,11 @@
         <div class='btnWrapper' v-show='!isEvaluate'>
           <div class='next_step_btn bg_color_green mt10' @click='beginEvaluateEvent'>评估</div>
         </div>
-        <div class='btnWrapper' v-show='isEvaluate'>
+        <div class='btnWrapper mt12' v-show='isEvaluate'>
           <div>车辆评估价：
             <span class='amount'>{{highPrice}}万</span>
           </div>
-          <button class='next_step_btn bg_color_green mt24' ref='next_step_btn' @click='applyBtn'>借款</button>
+          <button class='next_step_btn bg_color_green mt12' ref='next_step_btn' @click='applyBtn'>借款</button>
         </div>
       </section>
       <section class='advantageWrapper'>
@@ -115,7 +117,6 @@
 // import axios from 'axios'
 // import qs from 'qs'
 import BScroll from 'better-scroll'
-import mHeader from '@/components/HeaderBackAPP'
 import { Indicator, Toast } from 'mint-ui'
 import { queryForBrankList, queryForSeriesList, queryModelList, queryCitylList, queryCarPrice, visit, editApplyStatus, dataCache } from '../../api/index'
 const citys = {
@@ -273,8 +274,9 @@ export default {
       this.visit()
       sessionStorage.setItem('hash2', 1)
     }
-    if (this.$route.query.isSelectCarType) {
+    if (this.$route.query.second) {
       // this.ssdataCache()
+      this.visit()
     }
     // 判断当前用户的 customerKey 是否与上次进入这个页面的 customerKey 一样 是？获取上次本地存储的记录:从接口获取
     if (localStorage.getItem('customerKey')) {
@@ -322,6 +324,9 @@ export default {
       this.baseScroll = new BScroll(document.getElementById('base'), {
         click: true
       })
+    },
+    toHelpPage() {
+      this.$router.push('/help')
     },
     back() {
       if (this.$route.query.isSelectCarType) {
@@ -656,9 +661,6 @@ export default {
     cityEvent() {
       this.showCityPopup = true;
     }
-  },
-  components: {
-    mHeader
   }
 }
 </script>

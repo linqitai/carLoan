@@ -27,23 +27,31 @@
       text-align: center;
     }
     .back-img {
-      width: 22px;
-      height: 22px;
-      background-image: url('../../common/images/btn_back_white.png');
-      background-size: 100% 100%;
-      @include extend-click();
       position: absolute;
-      top: 11px;
-      left: 15px;
+      left: 0;
+      top: 0;
+      width: 44px;
+      height: 44px;
+      background: url('../../common/images/btn_back_white.png') no-repeat;
+      background-size: 22px 22px;
+      background-position: center center;
+      &:active {
+        border-radius: $borderRadius;
+        background-color: rgba(17, 175, 153, .6)
+      }
     }
     .logo {
-      width: 26px;
-      height: 26px;
-      background-image: url('../../common/images/logo.png');
-      background-size: 100% 100%;
+      width: 50px;
+      height: 44px;
+      line-height: 56px;
       position: absolute;
       top: 0px;
-      right: 15px;
+      right: 0px;
+      text-align: center;
+      &:active {
+        border-radius: $borderRadius;
+        background-color: rgba(17, 175, 153, .6)
+      }
     }
   }
   .mint-cell-wrapper {
@@ -123,6 +131,11 @@
     background-color: #ffffff;
     padding-left: 16px;
     margin-top: 12px;
+    .selectCarType {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
     .myCellWrapper {
       @include cell();
       @include border-1px();
@@ -203,7 +216,7 @@
     .title {
       border-left: 3px solid $main-color;
       padding-left: 5px;
-      font-size: 13px;
+      font-size: 14px;
       line-height: 12px;
     }
     .content {
