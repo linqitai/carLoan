@@ -1,6 +1,7 @@
 <template>
   <div class='carEvaluate'>
     <m-header>臻车贷</m-header>
+    <div class="base">
     <div class='steps_wrapper'>
       <div class='steps'>
         <div class='steps_icon bgImg1'></div>
@@ -55,9 +56,6 @@
               </mt-cell>
             </span>
           </mt-index-section>
-          <!-- <template v-for='(item, index) in seriesList'>
-                                                                                          <div class="selectTitle border-1px" :key="index" @click="chooseSeries(item.seriesId)">{{item.seriesName}}</div>
-                                                                                        </template> -->
         </mt-index-list>
       </van-popup>
       <!-- 选择车型POPUP -->
@@ -112,9 +110,9 @@
         </van-datetime-picker>
       </van-popup>
       <div class='myCellWrapper border-1px'>
-        <div class='title'>行驶里程</div>
+        <div class='titleMore'>行驶里程/万公里</div>
         <div class='value'>
-          <input type='number' v-model='form.mileage' placeholder='请输入行驶里程(万公里)'>
+          <input type='number' v-model='form.mileage' placeholder='请输入行驶里程'>
         </div>
         <div class='clear' @click="form.mileage=''" v-show='form.mileage'>
           <van-icon name='clear' />
@@ -129,7 +127,7 @@
         <div>车辆评估价：
           <span class='amount'>{{highPrice}}万</span>
         </div>
-        <button class='next_step_btn bg_color_green mt24' ref='next_step_btn' @click='applyBtn($event)'>申请借款</button>
+        <button class='next_step_btn bg_color_green mt24' ref='next_step_btn' @click='applyBtn'>申请借款</button>
       </div>
     </section>
     <section class='advantageWrapper'>
@@ -152,7 +150,7 @@
         </div>
       </div>
     </section>
-    <!-- <div>{{p}}</div> -->
+    </div>
   </div>
 </template>
 
@@ -160,7 +158,6 @@
 // import axios from 'axios'
 // import qs from 'qs'
 import mHeader from '@/components/HeaderBackAPP'
-import { isObjectHaveNull } from '../../common/js/utils'
 import { Indicator, Toast } from 'mint-ui'
 import { queryForBrankList, queryForSeriesList, queryModelList, queryCitylList, queryCarPrice, visit, editApplyStatus } from '../../api/index'
 const citys = {
@@ -272,7 +269,7 @@ export default {
       form: {
         mileage: '',
         carType: '',
-        modelId: 24464,
+        modelId: '',
         time: '',
         city: ''
       },
@@ -334,6 +331,9 @@ export default {
       editApplyStatus(params).then(res => {
         console.log(res)
       })
+    },
+    applyBtnTest() {
+      this.$router.push('/applyBM')
     },
     applyBtn() {
       let params = {
@@ -426,7 +426,7 @@ export default {
     },
     queryForBrankList() {
       queryForBrankList().then(res => {
-        console.log(res)
+        // console.log(res)
         this.list = res.list
       })
     },
@@ -435,7 +435,7 @@ export default {
         brankId: brandId
       }
       queryForSeriesList(params).then(res => {
-        console.log(res)
+        // console.log(res)
         this.showSeriesListPop = true
         this.seriesList = res.list
         // console.log(res.list[0])
@@ -447,14 +447,14 @@ export default {
         seriesId: seriesId
       }
       queryModelList(params).then(res => {
-        console.log(res)
+        // console.log(res)
         this.showModelListPop = true
         this.modelList = res.list
       })
     },
     queryCarPrice() {
-      console.log('city:' + this.form.city)
-      console.log(this.city)
+      // console.log('city:' + this.form.city)
+      // console.log(this.city)
       let params = {
         carCreditId: this.carCreditId,
         modelId: this.form.modelId, // 车型ID
@@ -466,21 +466,38 @@ export default {
         province: this.province,
         city: this.city
       }
-      if (isObjectHaveNull(params)) {
-        Toast('信息不完整')
-      } else {
-        Indicator.open()
-        queryCarPrice(params).then(res => {
-          if (res.code === 0) {
-            this.highPrice = res.obj.highPrice
-            this.showAdvantage = false
-            this.isEvaluate = true
-          } else if (res.code === -1) {
-            Toast(res.error)
-          }
-          Indicator.close()
-        })
+      if (params.modelId === '' || params.modelId === null) {
+        Toast('请填选择车型')
+        return
       }
+      if (params.regDate === '' || params.regDate === null) {
+        Toast('请填选择上牌时间')
+        return
+      }
+      if (params.city === '' || params.city === null) {
+        Toast('请填选择所在城市')
+        return
+      }
+      if (params.mile === '' || params.mile === null) {
+        Toast('请填写行驶里程')
+        return
+      }
+      if (params.mile > 100) {
+        Toast('行驶里程不能大于100万公里')
+        return
+      }
+      Indicator.open()
+      queryCarPrice(params).then(res => {
+        if (res.code === 0) {
+          this.highPrice = res.obj.highPrice
+          this.showAdvantage = false
+          this.isEvaluate = true
+        } else if (res.code === -1) {
+          Toast(res.error)
+        }
+        Indicator.close()
+      })
+      Indicator.close()
     },
     beginEvaluateEvent() {
       // begin
