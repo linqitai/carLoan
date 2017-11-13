@@ -1,5 +1,6 @@
 import axios from 'axios'
 import qs from 'qs'
+import { Indicator, Toast } from 'mint-ui'
 axios.defaults.timeout = 7000
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www=form-urlencoded'
 
@@ -15,9 +16,24 @@ export default {
   },
   fetchPost(url, data = {}) {
     return new Promise((resolve, reject) => {
+      Indicator.open()
+      axios.post(url, qs.stringify(data)).then(res => {
+        Indicator.close()
+        resolve(res.data)
+      }).catch(error => {
+        Toast('请求超时，网速有点慢哦')
+        Indicator.close()
+        reject(error)
+      })
+    })
+  },
+  fetchPostPrimary(url, data = {}) {
+    return new Promise((resolve, reject) => {
       axios.post(url, qs.stringify(data)).then(res => {
         resolve(res.data)
       }).catch(error => {
+        Toast('请求超时，网速有点慢哦')
+        Indicator.close()
         reject(error)
       })
     })

@@ -5,7 +5,8 @@
     <div class="text">
       <slot></slot>
     </div>
-    <div class="logo">
+    <div class="logo" @click="toHelpPage">
+      <mu-icon value="help_outline" :size="22" color="#efeff4"/>
     </div>
   </header>
 </template>
@@ -14,6 +15,9 @@ export default {
   methods: {
     back() {
       this.$router.goBack()
+    },
+    toHelpPage() {
+      this.$router.push('/help')
     }
   }
 }
