@@ -79,11 +79,10 @@
 
 <script>
 import mHeader from '@/components/Header';
-import { Toast } from 'mint-ui'
+import { Toast } from 'vant'
 import { submitApply } from '../../api/index'
 import { checkPhone, checkIdentity } from '../../common/js/utils'
 export default {
-  name: 'HelloWorld',
   data() {
     return {
       isEvaluate: false,

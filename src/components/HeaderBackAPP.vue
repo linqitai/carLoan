@@ -1,6 +1,6 @@
 <template>
   <header>
-    <div class="back-img" @click="back">
+    <div class="backIcon" @click="back">
     </div>
     <div class="text">
       <slot></slot>

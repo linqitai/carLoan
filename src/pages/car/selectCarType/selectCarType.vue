@@ -17,7 +17,7 @@
 
 <script>
 import mHeader from '@/components/Header2';
-import { Toast } from 'mint-ui'
+import { Toast } from 'vant'
 import {queryModelList} from '../../../api/index' //  queryForSeriesList, queryModelList
 export default {
   data() {

@@ -28,7 +28,6 @@
 import mHeader from '@/components/Header';
 
 export default {
-  name: 'HelloWorld',
   data() {
     return {
       isEvaluate: false,
@@ -84,7 +83,6 @@ export default {
       this.b = true
       setTimeout(function() {
         self.b = false
-        console.log(`b:false`)
       }, 3000)
     }
   },

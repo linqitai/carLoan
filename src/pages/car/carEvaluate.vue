@@ -2,14 +2,14 @@
   <div class='carEvaluate' id="carEvaluate">
     <!--<m-header>臻车贷</m-header>-->
     <header>
-      <div class="back-img" @click="back">
+      <div class="backIcon" @click="back">
       </div>
       <div class="text">
         臻车贷
       </div>
-      <div class="logo" @click="toHelpPage">
-        <!--<img src="../../common/images/helpIcon.png">-->
-        <mu-icon value="help_outline" :size="22" color="#efeff4"/>
+      <div class="helpIcon" @click="toHelpPage">
+        <!-- <img src="../../common/images/helpIcon.png" width="22" height="22"> -->
+        <!-- <mu-icon value="help_outline" :size="22" color="#efeff4"/> -->
       </div>
     </header>
     <div class="base" id="base">
@@ -44,11 +44,6 @@
         </div>
         <!-- 上牌时间Popup -->
         <van-popup v-model='showTimePopup' position='bottom' class='van-popup-2'>
-          <!--<div class="page-picker-wrapper" style="margin-bottom:2rem;">
-            <span style="float:left;font-size:1rem;padding:0.7rem 1rem" @click='showTimePopup = false'>取消</span>
-            <span style="float:right;font-size:1rem;padding:0.7rem 1rem;color:#5aa8f0" @click='timeHandlePickerConfirm()'>确定</span>
-          </div>
-          <mt-picker :slots="slotsDate" @change="timeChange"></mt-picker>-->
           <van-picker title="选择时间" :columns="timePickerColumns" show-toolbar @change="handleTimePickerChange" @cancel="handleTimePickerCancel" @confirm="timeHandlePickerConfirm"></van-picker>
           </van-datetime-picker>
         </van-popup>
@@ -69,7 +64,7 @@
         <div class='myCellWrapper border-1px'>
           <div class='titleMore'>行驶里程</div>
           <div class='value'>
-            <input type='number' v-model='form.mileage' placeholder='请输入行驶里程' @blur="mileageBlur(form.mileage)">
+            <input type="number" v-model='form.mileage' placeholder='请输入行驶里程' @blur="mileageBlur(form.mileage)">
           </div>
           <div class='clear' @click="form.mileage=''" v-show='form.mileage'>
             <van-icon name='clear' />
@@ -117,7 +112,7 @@
 // import axios from 'axios'
 // import qs from 'qs'
 import BScroll from 'better-scroll'
-import { Indicator, Toast } from 'mint-ui'
+import { Toast } from 'vant'
 import { queryForBrankList, queryForSeriesList, queryModelList, queryCitylList, queryCarPrice, visit, editApplyStatus, dataCache } from '../../api/index'
 const citys = {
   province: ['安徽', '澳门', '北京', '重庆', '福建', '广东', '甘肃', '广西', '贵州', '湖北', '湖南', '河北', '河南', '海南', '黑龙江', '吉林', '江苏', '江西', '辽宁', '内蒙古', '宁夏', '青海', '四川', '山东', '上海', '山西', '陕西', '天津', '台湾', '香港', '新疆', '西藏', '云南', '浙江']
@@ -597,7 +592,7 @@ export default {
         Toast('行驶里程不能小于1公里')
         return
       }
-      Indicator.open('评估中')
+      Toast.loading({ mask: true });
       queryCarPrice(params).then(res => {
         if (res.code === 0) {
           this.highPrice = res.obj.highPrice
@@ -608,12 +603,9 @@ export default {
         } else if (res.code === -1) {
           Toast(res.error)
         }
-        Indicator.close()
+        Toast.clear()
       })
-      Indicator.close()
-      // setTimeout(function () {
-      //   Indicator.close()
-      // }, 3000)
+      Toast.clear()
     },
     ssdataCache() {
       let params = {

@@ -36,7 +36,9 @@ module.exports = {
                 // target:'http://192.168.18.218:8061',// 张胜
                 // target: 'http://192.168.18.220:8061',// 修庆
                 // target: 'http://192.168.18.177:8030', // 子涵
-                target:'http://121.199.33.100:8030',// 线上
+                // target:'http://121.199.33.100:8030',// 线上
+                target:'http://47.96.251.26:8030',// 线上有域名
+                // target: 'http://www.zsbigdata.com.cn',
                 changeOrigin: true,
                 pathRewrite: {
                     '^/rz': ''

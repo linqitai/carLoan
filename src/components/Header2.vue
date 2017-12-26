@@ -1,12 +1,12 @@
 <template>
   <header>
-    <div class="back-img" @click="back">
+    <div class="backIcon" @click="back">
       <div class="text">
         <slot></slot>
       </div>
     </div>
     <!--<div class="logo">
-    </div>-->
+        </div>-->
   </header>
 </template>
 <script>

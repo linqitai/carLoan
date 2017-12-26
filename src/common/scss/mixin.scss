@@ -201,12 +201,13 @@
       outline: 0;
       width: 96%;
       text-align: right;
-      line-height: 46px;
+      height: 24px;
+      line-height: 24px;
       font-size: 14px;
     }
   }
   .clear {
-    flex: 0 0 15px; 
+    flex: 0 0 15px;
     margin-left: 5px;
     color: #dddddd;
     .arrow_right{

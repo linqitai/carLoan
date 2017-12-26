@@ -1,12 +1,12 @@
 <template>
   <header>
-    <div class="back-img" @click="back">
+    <div class="backIcon" @click="back">
     </div>
     <div class="text">
       <slot></slot>
     </div>
-    <div class="logo" @click="toHelpPage">
-      <mu-icon value="help_outline" :size="22" color="#efeff4"/>
+    <div class="helpIcon" @click="toHelpPage">
+      <!-- <img src="../common/images/helpIcon.png" width="22" height="22"> -->
     </div>
   </header>
 </template>

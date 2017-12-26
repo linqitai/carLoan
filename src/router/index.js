@@ -1,14 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import PageTransition from '@/components/PageTransition'
-import carEvaluate from '@/pages/car/carEvaluate'
-import applyBM from '@/pages/car/applyBM'
-import offlineManage from '@/pages/car/offlineManage'
-import help from '@/pages/car/help'
-// 选择车型
-import selectBrand from '@/pages/car/selectCarType/selectBrand'
-import selectSeries from '@/pages/car/selectCarType/selectSeries'
-import selectCarType from '@/pages/car/selectCarType/selectCarType'
+
 Router.prototype.goBack = function () {
   this.isBack = true
   window.history.go(-1)
@@ -20,31 +12,31 @@ const router = new Router({
     {
       path: '/',
       name: 'PageTransition',
-      component: PageTransition,
+      component: resolve => require(['@/components/PageTransition'], resolve),
       children: [{
         path: '',
-        component: carEvaluate
+        component: resolve => require(['@/pages/car/carEvaluate'], resolve)
       }, {
         path: '/carEvaluate',
-        component: carEvaluate
+        component: resolve => require(['@/pages/car/carEvaluate'], resolve)
       }, {
         path: '/applyBM',
-        component: applyBM
+        component: resolve => require(['@/pages/car/applyBM'], resolve)
       }, {
         path: '/offlineManage',
-        component: offlineManage
+        component: resolve => require(['@/pages/car/offlineManage'], resolve)
       }, {
         path: '/help',
-        component: help
+        component: resolve => require(['@/pages/car/help'], resolve)
       }, {
         path: '/selectBrand',
-        component: selectBrand
+        component: resolve => require(['@/pages/car/selectCarType/selectBrand'], resolve)
       }, {
         path: '/selectSeries',
-        component: selectSeries
+        component: resolve => require(['@/pages/car/selectCarType/selectSeries'], resolve)
       }, {
         path: '/selectCarType',
-        component: selectCarType
+        component: resolve => require(['@/pages/car/selectCarType/selectCarType'], resolve)
       }]
     }
   ]
