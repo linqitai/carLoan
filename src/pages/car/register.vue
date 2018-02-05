@@ -1,12 +1,5 @@
 <template>
 	<div class='register' id="register">
-		<!--<header>
-			<div class="backIcon" @click="back">
-			</div>
-			<div class="text">
-				臻车贷
-			</div>
-		</header>-->
 		<div class="content">
 			<div class="top_image"></div>
 			<div class="content_info">
@@ -80,19 +73,6 @@ export default {
 			}
 		},
 		methods: {
-			back() {
-				if(this.from === 'app') {
-					// h5返回安卓或是返回IOS
-					let ua = navigator.userAgent.toLowerCase()
-					if(/iphone|ipad|ipod/.test(ua)) {
-						popToViewController()
-					} else if(/android/.test(ua)) {
-						htmlToJava.popToViewController()
-					}
-				} else {
-					window.location.href = `http://fq.51puhui.cn/hk/zyd/dist/#/financing?type=${this.$route.query.type}&shopId=${this.$route.query.shopId}&isLogin=${this.$route.query.isLogin}&customerKey=${this.$route.query.customerKey}&accountTel=${this.$route.query.accountTel}`
-				}
-			},
 			// 手机号
 			inputPhone() { 
 				this.visibleTel = true;
@@ -269,7 +249,7 @@ export default {
 					Toast('请输入密码'); 
 					console.log(this.form.passwordText)
 					return;
-				} else if((/(^\d{1,9}$)/.test(this.form.passwordText))) {
+				} else if((/(^\d{1,8}$)/.test(this.form.passwordText))) {
 					console.log(this.form.passwordText)
 					Toast('请输入正确的密码');
 					return;
@@ -326,6 +306,8 @@ export default {
 							    	if(res.code === -1) {
 							    		Toast(res.error)
 							    	} else if(res.code === 0) {
+							    		localStorage.setItem('customerKey', res.account.accountId);
+							    		localStorage.setItem('accountTel', res.account.phone);
 							    		this.$router.push('/carEvaluate');
 							    	}
 							     })

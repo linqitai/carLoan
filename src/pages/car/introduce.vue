@@ -43,7 +43,7 @@
 
 <script>
 import { Toast } from 'mint-ui'
-import {visit, searchShop} from '../../api/index'
+import {searchShop} from '../../api/index'
 export default {
   data() {
 	return {
@@ -69,8 +69,6 @@ export default {
 		        
 		        }
 		      searchShop(params).then(res => {
-//		      		localStorage.setItem("app","weixin")
-		            console.log(res);
 		            if(res.code !== 300) {
 		            	this.$router.push('/carEvaluate');
 		            } else {

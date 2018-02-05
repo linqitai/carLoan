@@ -139,7 +139,7 @@ export default {
 												closeOnClickModal: false
 											})
 							    	} else if(res.code === 0) {
-							    		console.log(res)
+//							    		console.log(res)
 							    		console.log(res.account.accountId)
 							    		console.log(res.account.phone)
 							    		localStorage.setItem('customerKey', res.account.accountId);

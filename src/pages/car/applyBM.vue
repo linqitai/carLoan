@@ -57,7 +57,7 @@
       </section>
       <section class="btnBox">
         <div class="btnWrapper">
-          <button class="next_step_btn bg_color_green" ref="next_step_btn" @click="submitApplyBtn">提交</button>
+          <button class="next_step_btn bg_color_green" ref="next_step_btn" @click="submitApplyBtn">提交申请</button>
         </div>
       </section>
       <section class="cooperationPlatWrapper">
