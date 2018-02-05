@@ -1,4 +1,4 @@
-// http://eslint.org/docs/user-guide/configuring
+﻿// http://eslint.org/docs/user-guide/configuring
 
 module.exports = {
     root: true,
@@ -33,6 +33,29 @@ module.exports = {
         'space-before-function-paren': 0,
         'indent': 0,
         'no-unused-vars': 0,
-        'no-trailing-spaces': 0
+        'no-trailing-spaces': 0,
+        'no-tabs':0,
+        'keyword-spacing':0,
+        'comma-dangle':0,
+        'no-mixed-spaces-and-tabs': 0,
+        'new-cap': 0,
+        'semi-spacing':0,
+        'space-infix-ops':0,
+        'comma-spacing':0,
+        'block-spacing':0,
+        'space-before-blocks':0,
+        'key-spacing':0,
+        'quotes':0,
+        'no-sequences':0,
+        'eqeqeq':0,
+        'one-var':0,
+        'yoda':0,
+        'wrap-iife':0,
+        'no-return-assign':0,
+        'no-redeclare':0,
+        'spaced-comment':0,
+        'no-floating-decimal':0,
+        'new-parens':0,
+  
     }
 }

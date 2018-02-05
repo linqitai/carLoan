@@ -1,17 +1,13 @@
 <template>
   <div class='carEvaluate' id="carEvaluate">
     <!--<m-header>臻车贷</m-header>-->
-    <header>
+    <!--<header>
       <div class="backIcon" @click="back">
       </div>
       <div class="text">
-        臻车贷
+                  臻车贷
       </div>
-      <div class="helpIcon" @click="toHelpPage">
-        <!-- <img src="../../common/images/helpIcon.png" width="22" height="22"> -->
-        <!-- <mu-icon value="help_outline" :size="22" color="#efeff4"/> -->
-      </div>
-    </header>
+    </header>-->
     <div class="base" id="base">
       <div class='steps_wrapper'>
         <div class='steps'>
@@ -104,6 +100,7 @@
           </div>
         </div>
       </section>
+      <div class="helpText" @click="toHelpPage">帮助中心</div>
     </div>
   </div>
 </template>
@@ -252,8 +249,8 @@ export default {
       currentCityId: '',
       highPrice: '',
       carCreditId: localStorage.getItem('carCreditId') ? localStorage.getItem('carCreditId') : '',
-      customerKey: parseInt(this.$route.query.customerKey),
-      accountTel: parseInt(this.$route.query.accountTel),
+      customerKey: localStorage.getItem('customerKey') ? localStorage.getItem('customerKey') : '', // id
+      accountTel: localStorage.getItem('accountTel') ? localStorage.getItem('accountTel') : '', // 账户手机号
       from: this.$route.query.from
     }
   },
@@ -293,22 +290,12 @@ export default {
         }
       } else {
         localStorage.setItem('customerKey', this.customerKey)
-        console.log('setItem(customerKey):' + this.customerKey)
         localStorage.setItem('accountTel', this.accountTel)
-        localStorage.setItem('type', this.$route.query.type)
-        localStorage.setItem('shopId', this.$route.query.shopId)
-        localStorage.setItem('isLogin', this.$route.query.isLogin)
-        localStorage.setItem('from', this.$route.query.from)
         //  这里请求用户上次评估车辆所填写的数据
       }
     } else {
       localStorage.setItem('customerKey', this.customerKey)
-      console.log('setItem(customerKey):' + this.customerKey)
       localStorage.setItem('accountTel', this.accountTel)
-      localStorage.setItem('type', this.$route.query.type)
-      localStorage.setItem('shopId', this.$route.query.shopId)
-      localStorage.setItem('isLogin', this.$route.query.isLogin)
-      localStorage.setItem('from', this.$route.query.from)
     }
     // this.$nextTick(() => {
     //   this._initScroll()

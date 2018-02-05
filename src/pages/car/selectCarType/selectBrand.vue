@@ -1,6 +1,6 @@
 <template>
   <div class="selectCarType" ref="selectCarType">
-    <m-header>选择品牌</m-header>
+    <!--<m-header>选择品牌</m-header>-->
     <div class="base" ref="base">
       <div class='items' ref="items" v-for='(item, index) in list'>
           <div class="title">{{item[0].initial}}</div>
@@ -14,7 +14,7 @@
 
 <script>
 // import BScroll from 'better-scroll'
-import mHeader from '@/components/Header2';
+//import mHeader from '@/components/Header2';
 import { Toast } from 'vant'
 import {queryForBrankList} from '../../../api/index' //  queryForSeriesList, queryModelList
 export default {
@@ -41,9 +41,9 @@ export default {
       })
     }
   },
-  components: {
-    mHeader
-  }
+//components: {
+//  mHeader
+//}
 }
 </script>
 

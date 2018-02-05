@@ -1,0 +1,114 @@
+@import '../../common/scss/index.scss';
+@mixin bgImage($url) {
+    background-image: url($url + "@2x.png");
+    @media (-webkit-min-device-pixel-ratio: 3), (min-device-pixel-ratio: 3) {
+        background-image: url($url + "@3x.png");
+    }
+}
+
+.introduce {
+    font-family: PingFang-SC-Medium;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: #fff;
+    header {
+        @include border-1px();
+        @include topHeader();
+        width: 100%;
+        height: 44px;
+        font-size: 18px;
+        background-color: $main-color;
+        .text {
+            width: 100%;
+            line-height: 44px;
+            text-align: center;
+        }
+        .backIcon {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 44px;
+            height: 44px;
+            background: url('../../common/images/leftArrow.png') no-repeat;
+            background-size: 18px 18px;
+            background-position: center center;
+            &:active {
+                border-radius: $borderRadius;
+                background-color: rgba(17, 175, 153, .6)
+            }
+        }
+    }
+    .content {
+        position: absolute;
+        width: 100%;
+//      top: 44px;
+        .top_image {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 160px;
+            background: url('../../common/images/zcd_pic_banner.png') no-repeat;
+            background-size: 100% 160px;
+            background-position: center center;
+        }
+        .text {
+            margin-top: 170px;
+            line-height: 20px;
+            font-size: 13px;
+            color: #323232;
+            padding: 0px 12px 20px 12px;
+            .text_bottom {
+                margin-top: 15px;
+            }
+        }
+        .advantageWrapper {
+            display: flex;
+            .box {
+                flex: 1;
+                text-align: center;
+                font-size: 13px;
+                color: #646464;
+                padding-top: 10px;
+                padding-bottom: 10px;
+                .img {
+                    width: 38px;
+                    height: 38px;
+                    margin: 0 auto;
+                    display: block;
+                    background-repeat: no-repeat;
+                    background-size: 38px 38px;
+                    &.img1 {
+                        @include bgImage($url: '../../common/images/icon_rate');
+                    }
+                    &.img2 {
+                        @include bgImage($url: '../../common/images/icon_quick');
+                    }
+                    &.img3 {
+                        @include bgImage($url: '../../common/images/icon_limit');
+                    }
+                }
+            }
+        }
+        .button {
+            text-align: center;
+            margin-top: 5%;
+            .apply {
+                margin-left: auto;
+                margin-right: auto;
+                width: 170px;
+                height: 38px;
+                line-height: 38px;
+                text-align: center;
+                color: #ffffff;
+                background-color: #11af99;
+                font-size: 16px;
+                border-radius: 50px;
+                border: none;
+            }
+        }
+    }
+}

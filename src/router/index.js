@@ -15,7 +15,13 @@ const router = new Router({
       component: resolve => require(['@/components/PageTransition'], resolve),
       children: [{
         path: '',
-        component: resolve => require(['@/pages/car/carEvaluate'], resolve)
+        component: resolve => require(['@/pages/car/introduce'], resolve)
+      }, {
+        path: '/register',
+        component: resolve => require(['@/pages/car/register'], resolve)
+      }, {
+        path: '/login',
+        component: resolve => require(['@/pages/car/login'], resolve)
       }, {
         path: '/carEvaluate',
         component: resolve => require(['@/pages/car/carEvaluate'], resolve)

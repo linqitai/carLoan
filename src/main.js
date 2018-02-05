@@ -8,9 +8,13 @@ import Vant from 'vant';
 import 'vant/lib/vant-css/index.css';
 import fastclick from 'fastclick'
 import './common/scss/reset.scss';
+import Mint from 'mint-ui';
+import 'mint-ui/lib/style.css'
+import crypto from 'crypto'
 fastclick.attach(document.body)
 
 Vue.use(Vant);
+Vue.use(Mint);
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

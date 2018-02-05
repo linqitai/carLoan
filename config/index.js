@@ -26,7 +26,7 @@ module.exports = {
     },
     dev: {
         env: require('./dev.env'),
-        port: 8081,
+        port: 8089,
         autoOpenBrowser: true,
         assetsSubDirectory: 'static',
         assetsPublicPath: '/',
@@ -38,10 +38,17 @@ module.exports = {
                 // target: 'http://192.168.18.177:8030', // 子涵
                 // target:'http://121.199.33.100:8030',// 线上
                 target:'http://47.96.251.26:8030',// 线上有域名
-                // target: 'http://www.zsbigdata.com.cn',
+//                 target: 'http://www.zsbigdata.com.cn/zsmanage/',
                 changeOrigin: true,
                 pathRewrite: {
                     '^/rz': ''
+                }
+            },
+            '/zed': {
+                target:'http://139.224.64.44:8001',// 测试环境有域名
+                changeOrigin: true,
+                pathRewrite: {
+                    '^/zed': ''
                 }
             }
         },

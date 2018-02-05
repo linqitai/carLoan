@@ -1,6 +1,6 @@
 <template>
   <div class="selectCarType" ref="selectCarType">
-    <m-header>选择车系</m-header>
+    <!--<m-header>选择车系</m-header>-->
     <div class="base" ref="base">
       <div class="searchBox" v-if="isShowSearchBox">
         <template v-for="(item, index) in seriesGroupNames">
@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import mHeader from '@/components/Header2';
+//import mHeader from '@/components/Header2';
 import { Toast } from 'vant'
 import {queryForSeriesList} from '../../../api/index' //  queryForSeriesList, queryModelList
 export default {
@@ -81,9 +81,9 @@ export default {
       })
     }
   },
-  components: {
-    mHeader
-  }
+//components: {
+//  mHeader
+//}
 }
 </script>
 

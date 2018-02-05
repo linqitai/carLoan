@@ -1,6 +1,6 @@
 <template>
   <div class="carEvaluate">
-    <m-header>臻车贷</m-header>
+    <!--<m-header>臻车贷</m-header>-->
     <div class="base">
       <div class="steps_wrapper">
         <div class="steps">
@@ -73,12 +73,13 @@
           </div>
         </div>
       </section>
+      <div class="helpText" @click="toHelpPage">帮助中心</div>
     </div>
   </div>
 </template>
 
 <script>
-import mHeader from '@/components/Header';
+//import mHeader from '@/components/Header';
 import { Toast } from 'vant'
 import { submitApply } from '../../api/index'
 import { checkPhone, checkIdentity } from '../../common/js/utils'
@@ -108,6 +109,9 @@ export default {
   created() {
   },
   methods: {
+  	toHelpPage() {
+      this.$router.push('/help')
+    },
     submitApply() {
       let inputs = document.getElementsByTagName('input')
       let params = {
@@ -169,9 +173,9 @@ export default {
       }, 3000)
     }
   },
-  components: {
-    mHeader
-  }
+//components: {
+//  mHeader
+//}
 }
 </script>
 

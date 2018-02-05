@@ -1,6 +1,6 @@
 <template>
   <div class="help">
-    <m-header>帮助</m-header>
+    <!--<m-header>帮助</m-header>-->
     <div ref="base" class="base">
       <div class="content">
         <div class="title">臻车贷是什么？</div>
@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import mHeader from '@/components/Header2';
+//import mHeader from '@/components/Header2';
 import BScroll from 'better-scroll';
 
 export default {
@@ -38,9 +38,9 @@ export default {
   },
   methods: {
   },
-  components: {
-    mHeader
-  }
+//components: {
+//  mHeader
+//}
 }
 </script>
 

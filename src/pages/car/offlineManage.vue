@@ -1,6 +1,6 @@
 <template>
   <div class="carEvaluate" style="background-color:#fff">
-    <m-header>臻车贷</m-header>
+    <!--<m-header>臻车贷</m-header>-->
     <div class="base">
       <div class="steps_wrapper">
         <div class="steps">
@@ -20,12 +20,21 @@
           <button class="next_step_btn bg_color_green" ref="next_step_btn" @click="submitApply">完成</button>
         </div>
       </section>
+      <div class="border-bg10"></div>
+      <div class="downloadZed">
+      	   <div class="logoImg"></div>
+      	   <div class="textTop">臻e盾</div>
+      	   <div class="textBottom">全国领先的安保服务平台</div>
+      	   <div class="loginText" @click="download">下载</div>
+      </div>
+      <div class="borderBg"></div>
+      <div class="helpText" @click="toHelpPage">帮助中心</div>
     </div>
   </div>
 </template>
 
 <script>
-import mHeader from '@/components/Header';
+//import mHeader from '@/components/Header';
 
 export default {
   data() {
@@ -63,6 +72,14 @@ export default {
     this.from = localStorage.getItem('from')
   },
   methods: {
+  	// 帮助中心
+  	 toHelpPage() {
+      this.$router.push('/help')
+    },
+    // 点击下载
+    download() {
+    	window.location.href = 'https://jxo2o.51icare.cn/template/share/html/load.html'
+    },
     submitApply() {
       // window.location.href = `http://114.55.32.138/bigData/cdd/dist/#/carEvaluate?customerKey=${this.customerKey}&type=${this.type}&shopId=${this.shopId}&isLogin=${this.isLogin}&accountTel=${this.accountTel}`
       this.$router.push(`/carEvaluate?customerKey=${this.customerKey}&type=${this.type}&shopId=${this.shopId}&isLogin=${this.isLogin}&accountTel=${this.accountTel}&from=${this.from}&second=1`)
@@ -86,9 +103,9 @@ export default {
       }, 3000)
     }
   },
-  components: {
-    mHeader
-  }
+//components: {
+//  mHeader
+//}
 }
 </script>
 
