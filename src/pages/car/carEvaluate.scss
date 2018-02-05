@@ -233,6 +233,8 @@
       line-height: 12px;
     }
     .content {
+      font-size: 12px;
+      position: relative;
       display: flex;
       background-color: #ffffff;
 //    margin-top: 12px;
@@ -266,6 +268,21 @@
           }
         }
       }
+          .textTop{
+              position: absolute;
+              top: 20%;
+              left: 40%;
+          }
+          .textCenter{
+              position: absolute;
+              top: 40%;
+              left: 40%;
+          }
+          .textBottom{
+              position: absolute;
+              top: 60%;
+              left: 40%;
+          }
     }
   }
 }

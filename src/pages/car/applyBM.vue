@@ -66,11 +66,9 @@
           <div class="box flex1">
             <div class="img"></div>
           </div>
-          <div class="box flex2">
-            <div class="left">1.国资企业强势入股</div>
-            <div class="left">2.行业内权威企业</div>
-            <div class="left">3.全国数百家店，标的真实可靠</div>
-          </div>
+          <div class="textTop">1.国资企业强势入股</div>
+          <div class="textCenter">2.行业内权威企业</div>
+          <div class="textBottom">3.全国数百家店，标的真实可靠</div>
         </div>
       </section>
       <div class="helpText" @click="toHelpPage">帮助中心</div>
