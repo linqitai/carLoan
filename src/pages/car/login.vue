@@ -144,7 +144,7 @@ export default {
 							    		console.log(res.account.phone)
 							    		localStorage.setItem('customerKey', res.account.accountId);
 							    		localStorage.setItem('accountTel', res.account.phone);
-							    		this.$router.push('/carEvaluate');
+							    		this.$router.push(`/carEvaluate?customerKey=${res.account.accountId}&accountTel=${res.account.phone}`);
 							    	}
 							    })
 				             }

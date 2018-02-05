@@ -308,7 +308,7 @@ export default {
 							    	} else if(res.code === 0) {
 							    		localStorage.setItem('customerKey', res.account.accountId);
 							    		localStorage.setItem('accountTel', res.account.phone);
-							    		this.$router.push('/carEvaluate');
+							    		this.$router.push(`/carEvaluate?customerKey=${res.account.accountId}&accountTel=${res.account.phone}`);
 							    	}
 							     })
 							}, 2000);

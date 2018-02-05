@@ -43,15 +43,11 @@ export default {
       // 获取缓存
       let customerKey = localStorage.getItem('customerKey')
       let accountTel = localStorage.getItem('accountTel')
-      let type = localStorage.getItem('type')
-      let shopId = localStorage.getItem('shopId')
-      let isLogin = localStorage.getItem('isLogin')
-      let from = localStorage.getItem('from')
       // 清空缓存
       localStorage.setItem('time', '')
       localStorage.setItem('provinceCity', '')
       localStorage.setItem('mileage', '')
-      this.$router.push(`./carEvaluate?customerKey=${customerKey}&accountTel=${accountTel}&type=${type}&shopId=${shopId}&isLogin=${isLogin}&from=${from}&isSelectCarType=1`)
+      this.$router.push(`./carEvaluate?customerKey=${customerKey}&accountTel=${accountTel}&isSelectCarType=1`)
     },
     queryModelList(seriesId) {
       let params = {

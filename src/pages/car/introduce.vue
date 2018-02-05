@@ -70,12 +70,15 @@ export default {
 		        }
 		      searchShop(params).then(res => {
 		            if(res.code !== 300) {
-		            	this.$router.push('/carEvaluate');
+		            	let customerKey = localStorage.getItem('customerKey')
+		            	let accountTel = localStorage.getItem('accountTel')
+		            	this.$router.push(`/carEvaluate?customerKey=${customerKey}&accountTel=${accountTel}`);
 		            } else {
-		            	Toast('请先注册臻e盾');
-		            	setTimeout(() => {
-						  this.$router.push('/register');
-						}, 2000);
+		            	let instance = Toast('请先注册臻e盾');
+						setTimeout(() => {
+						  instance.close();
+						}, 800);
+						this.$router.push('/register');
 		            }
 		        })
 		    }
