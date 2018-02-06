@@ -44,7 +44,7 @@ import { Toast, MessageBox, Indicator } from 'mint-ui'
 import { checkPhone } from '../../common/js/utils'
 import {visit, phoneRegistered, queryCode, loginZed} from '../../api/index'
 import http from '../../api/public'
-const zed = '/zed';
+const zed = '/zedTest';
 const TIME_COUNT = 60;
 export default {
   data() {
