@@ -71,7 +71,7 @@
       <section class="btnBox">
         <!-- 开始评估按钮 -->
         <div class='btnWrapper' v-show='!isEvaluate'>
-          <div class='next_step_btn bg_color_green mt10' @click='beginEvaluateEvent'>评估</div>
+          <div class='next_step_btn bg_color_green mt10' @click.stop='beginEvaluateEvent'>评估</div>
         </div>
         <div class='btnWrapper mt12' v-show='isEvaluate'>
           <div>车辆评估价：

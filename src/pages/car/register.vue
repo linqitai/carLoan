@@ -42,9 +42,9 @@
 <script>
 import { Toast, MessageBox, Indicator } from 'mint-ui'
 import { checkPhone } from '../../common/js/utils'
-import {visit, phoneRegistered, queryCode, loginZed} from '../../api/index'
+import {visit, phoneRegistered, queryCode, loginZed, getZed} from '../../api/index'
 import http from '../../api/public'
-const zed = '/zedTest';
+const zed = getZed();
 const TIME_COUNT = 60;
 export default {
   data() {
