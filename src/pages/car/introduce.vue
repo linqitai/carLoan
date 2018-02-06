@@ -72,6 +72,7 @@ export default {
 		            if(res.code !== 300) {
 		            	let customerKey = localStorage.getItem('customerKey')
 		            	let accountTel = localStorage.getItem('accountTel')
+		            	console.log(customerKey + "," + accountTel)
 		            	this.$router.push(`/carEvaluate?customerKey=${customerKey}&accountTel=${accountTel}`);
 		            } else {
 		            	let instance = Toast('请先注册臻e盾');

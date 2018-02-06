@@ -249,8 +249,8 @@ export default {
       currentCityId: '',
       highPrice: '',
       carCreditId: localStorage.getItem('carCreditId') ? localStorage.getItem('carCreditId') : '',
-      customerKey: this.$route.query.customerKey,
-      accountTel: this.$route.query.accountTel,
+      customerKey: localStorage.getItem('customerKey') ? localStorage.getItem('customerKey') : '', // id
+      accountTel: localStorage.getItem('accountTel') ? localStorage.getItem('accountTel') : '', // 账户手机号
       from: this.$route.query.from
     }
   },
@@ -290,13 +290,11 @@ export default {
         }
       } else {
         localStorage.setItem('customerKey', this.customerKey)
-        console.log('setItem(customerKey):' + this.customerKey)
         localStorage.setItem('accountTel', this.accountTel)
         //  这里请求用户上次评估车辆所填写的数据
       }
     } else {
       localStorage.setItem('customerKey', this.customerKey)
-      console.log('setItem(customerKey):' + this.customerKey)
       localStorage.setItem('accountTel', this.accountTel)
     }
     // this.$nextTick(() => {
