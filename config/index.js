@@ -31,7 +31,7 @@ module.exports = {
         assetsSubDirectory: 'static',
         assetsPublicPath: '/',
         proxyTable: {
-            '/rz': {
+            '/rzTest': {
                 // target:'http://192.168.18.170:8061',// 义良
                 // target:'http://192.168.18.218:8061',// 张胜
                 // target: 'http://192.168.18.220:8061',// 修庆
@@ -41,14 +41,14 @@ module.exports = {
 //                 target: 'http://www.zsbigdata.com.cn/zsmanage/',
                 changeOrigin: true,
                 pathRewrite: {
-                    '^/rz': ''
+                    '^/rzTest': ''
                 }
             },
-            '/zed': {
+            '/zedTest': {
                 target:'http://139.224.64.44:8001',// 测试环境有域名
                 changeOrigin: true,
                 pathRewrite: {
-                    '^/zed': ''
+                    '^/zedTest': ''
                 }
             }
         },
