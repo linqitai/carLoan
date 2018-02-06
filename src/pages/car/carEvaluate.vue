@@ -587,7 +587,8 @@ export default {
           this.isEvaluate = true
           // 存储用户填写信息
           this.dataCache(params)
-        } else if (res.code === -1) {
+        } else {
+        	console.log(res.error)
           Toast(res.error)
         }
         Toast.clear()
