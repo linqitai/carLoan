@@ -5,7 +5,6 @@ let zed = '/zedTest'
 export const getZed = () => {
   return zed
 }
-// let root = 'http://192.168.18.177:8030'
 // 用户进入页面后保存数据
 export const visit = (params) => {
   return http.fetchPost(root + '/m/filter/cheCredit/visit.json', params)
