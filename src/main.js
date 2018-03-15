@@ -8,6 +8,7 @@ import Vant from 'vant';
 import 'vant/lib/vant-css/index.css';
 import fastclick from 'fastclick'
 import './common/scss/reset.scss';
+import './common/js/app-api';
 fastclick.attach(document.body)
 
 Vue.use(Vant);

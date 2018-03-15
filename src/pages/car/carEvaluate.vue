@@ -1,6 +1,5 @@
 <template>
   <div class='carEvaluate' id="carEvaluate">
-    <!--<m-header>臻车贷</m-header>-->
     <header>
       <div class="backIcon" @click="back">
       </div>
@@ -8,8 +7,6 @@
         臻车贷
       </div>
       <div class="helpIcon" @click="toHelpPage">
-        <!-- <img src="../../common/images/helpIcon.png" width="22" height="22"> -->
-        <!-- <mu-icon value="help_outline" :size="22" color="#efeff4"/> -->
       </div>
     </header>
     <div class="base" id="base">
@@ -168,7 +165,6 @@ const addressList = {
     '花莲县', '台东县', '澎湖县', '基隆市', '新竹市', '台中市', '嘉义市', '台南市'
   ]
 };
-// console.log('addressList:' + addressList.length)
 var years = ['2014', '2015', '2016', '2017']
 const months = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
 export default {
@@ -258,6 +254,29 @@ export default {
     }
   },
   created() {
+    // if (jiexin.isIos()) {
+    //   jiexin.isShowRight = function() {
+    //     alert(123);
+    //     var aa = {};
+    //     aa.title = '';
+    //     aa.imageUrl = 'https://qiniujiexino2opublic.51icare.cn/icon_help@3x.png';
+    //     isShowRightButton(aa);
+    //   }
+    // }
+    // if (jiexin.isAndroid()) {
+    //   jiexin.isShowRight = function() {
+    //     alert(123);
+    //     var aa = {};
+    //     aa.code = 1;
+    //     aa.title = '';
+    //     aa.imageUrl = 'https://qiniujiexino2opublic.51icare.cn/icon_help@3x.png';
+    //     // console.log(JSON.stringify(aa))
+    //     htmlToJava.handleEDunWebViewAction(JSON.stringify(aa));
+    //   }
+    // }
+    // jiexin.rightEvent = function() {
+    //   alert(123);
+    // }
     console.log('===carEvaluatePage===')
     console.log('customerKey:' + this.customerKey)
     console.log('accountTel:' + this.accountTel)
@@ -270,8 +289,11 @@ export default {
       sessionStorage.setItem('hash2', 1)
     }
     if (this.$route.query.second) {
-      // this.ssdataCache()
       this.visit()
+    }
+    // 新增
+    if (!this.$route.query.second) {
+      this.visitInit()
     }
     // 判断当前用户的 customerKey 是否与上次进入这个页面的 customerKey 一样 是？获取上次本地存储的记录:从接口获取
     if (localStorage.getItem('customerKey')) {
@@ -329,16 +351,13 @@ export default {
       }
       // this.$router.go(-1)
       // window.location.href = `http://fq.51puhui.cn/hk/zyd/dist/#/financing?type=${this.type}&shopId=${this.shopId}&isLogin=${this.isLogin}&customerKey=${this.customerKey}&accountTel=${this.accountTel}`
-      if (this.from === 'app') {
-        // h5返回安卓或是返回IOS
-        let ua = navigator.userAgent.toLowerCase()
-        if (/iphone|ipad|ipod/.test(ua)) {
-          popToViewController()
-        } else if (/android/.test(ua)) {
-          htmlToJava.popToViewController()
-        }
-      } else {
-        window.location.href = `http://fq.51puhui.cn/hk/zyd/dist/#/financing?type=${this.$route.query.type}&shopId=${this.$route.query.shopId}&isLogin=${this.$route.query.isLogin}&customerKey=${this.$route.query.customerKey}&accountTel=${this.$route.query.accountTel}`
+
+      // h5返回安卓或是返回IOS
+      let ua = navigator.userAgent.toLowerCase()
+      if (/iphone|ipad|ipod/.test(ua)) {
+        popToViewController()
+      } else if (/android/.test(ua)) {
+        htmlToJava.popToViewController()
       }
     },
     dataCache(params) {
@@ -352,7 +371,32 @@ export default {
     },
     mileageBlur(mileage) {
       localStorage.setItem('mileage', mileage)
-      // this.ssdataCache()
+    },
+    visitInit() {
+      let params = {
+        zedAccount: this.accountTel,
+        customerKey: this.customerKey
+      }
+      visit(params).then(res => {
+        console.log('visit:')
+        console.log(res)
+        if (res.code === 0) {
+          this.carCreditId = res.obj.carCreditId
+          localStorage.setItem('carCreditId', this.carCreditId)
+          let zone = res.obj.zone
+          this.form.time = res.obj.regDate
+          this.form.mileage = res.obj.mile
+          this.form.modelId = res.obj.modelId
+          let params = {
+            cityId: zone
+          }
+          this.queryCity(params)
+          let params2 = {
+            modelId: this.form.modelId
+          }
+          this.queryMode(params2)
+        }
+      })
     },
     visit() {
       let params = {
@@ -367,6 +411,7 @@ export default {
         //   city: '',
         //   mileage: ''
         // },
+        console.log('visit:')
         console.log(res)
         if (res.code === 0) {
           this.carCreditId = res.obj.carCreditId
@@ -478,7 +523,6 @@ export default {
         provName: this.province
       }
       this.queryCitylList(params)
-      // this.ssdataCache()
     },
     closeSelectBrand() {
       // this.showCarTypePop = true
@@ -566,17 +610,21 @@ export default {
         city: this.city
       }
       if (params.modelId === '' || params.modelId === null) {
-        Toast('请填选择车型')
+        Toast('请选择车型')
         // this.carTypeEvent()
         // inputs[0].focus()
         return
       }
       if (params.regDate === '' || params.regDate === null) {
-        Toast('请填选择上牌时间')
+        Toast('请选择上牌时间')
+        return
+      }
+      if (params.zone === '' || params.zone === null) {
+        Toast('请重新选择所在城市')
         return
       }
       if (params.city === '' || params.city === null) {
-        Toast('请填选择所在城市')
+        Toast('请选择所在城市')
         return
       }
       if (params.mile === '' || params.mile === null) {
@@ -648,7 +696,6 @@ export default {
       this.showTimePopup = false;
       this.form.time = value[0] + '-' + value[1];
       localStorage.setItem('time', this.form.time)
-      // this.ssdataCache()
     },
     cityEvent() {
       this.showCityPopup = true;
