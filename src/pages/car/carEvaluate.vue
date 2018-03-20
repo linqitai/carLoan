@@ -1,6 +1,6 @@
 <template>
   <div class='carEvaluate' id="carEvaluate">
-    <header>
+    <!-- <header>
       <div class="backIcon" @click="back">
       </div>
       <div class="text">
@@ -8,7 +8,7 @@
       </div>
       <div class="helpIcon" @click="toHelpPage">
       </div>
-    </header>
+    </header> -->
     <div class="base" id="base">
       <div class='steps_wrapper'>
         <div class='steps'>
@@ -110,6 +110,7 @@
 // import qs from 'qs'
 import BScroll from 'better-scroll'
 import { Toast } from 'vant'
+import { headAPP } from 'common/js/utils.js'
 import { queryForBrankList, queryForSeriesList, queryModelList, queryCitylList, queryCarPrice, visit, editApplyStatus, dataCache } from '../../api/index'
 const citys = {
   province: ['安徽', '澳门', '北京', '重庆', '福建', '广东', '甘肃', '广西', '贵州', '湖北', '湖南', '河北', '河南', '海南', '黑龙江', '吉林', '江苏', '江西', '辽宁', '内蒙古', '宁夏', '青海', '四川', '山东', '上海', '山西', '陕西', '天津', '台湾', '香港', '新疆', '西藏', '云南', '浙江']
@@ -254,29 +255,7 @@ export default {
     }
   },
   created() {
-    // if (jiexin.isIos()) {
-    //   jiexin.isShowRight = function() {
-    //     alert(123);
-    //     var aa = {};
-    //     aa.title = '';
-    //     aa.imageUrl = 'https://qiniujiexino2opublic.51icare.cn/icon_help@3x.png';
-    //     isShowRightButton(aa);
-    //   }
-    // }
-    // if (jiexin.isAndroid()) {
-    //   jiexin.isShowRight = function() {
-    //     alert(123);
-    //     var aa = {};
-    //     aa.code = 1;
-    //     aa.title = '';
-    //     aa.imageUrl = 'https://qiniujiexino2opublic.51icare.cn/icon_help@3x.png';
-    //     // console.log(JSON.stringify(aa))
-    //     htmlToJava.handleEDunWebViewAction(JSON.stringify(aa));
-    //   }
-    // }
-    // jiexin.rightEvent = function() {
-    //   alert(123);
-    // }
+    headAPP()
     console.log('===carEvaluatePage===')
     console.log('customerKey:' + this.customerKey)
     console.log('accountTel:' + this.accountTel)

@@ -1,6 +1,6 @@
 <template>
   <div class="carEvaluate" style="background-color:#fff">
-    <m-header>臻车贷</m-header>
+    <!-- <m-header>臻车贷</m-header> -->
     <div class="base">
       <div class="steps_wrapper">
         <div class="steps">
@@ -26,6 +26,7 @@
 
 <script>
 import mHeader from '@/components/Header';
+import { headAPP } from 'common/js/utils.js'
 
 export default {
   data() {
@@ -55,6 +56,7 @@ export default {
     }
   },
   created() {
+    headAPP()
     this.customerKey = localStorage.getItem('customerKey')
     this.accountTel = localStorage.getItem('accountTel')
     this.type = localStorage.getItem('type')

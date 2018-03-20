@@ -1,6 +1,5 @@
 <template>
   <div class="help">
-    <m-header>帮助</m-header>
     <div ref="base" class="base">
       <div class="content">
         <div class="title">臻车贷是什么？</div>

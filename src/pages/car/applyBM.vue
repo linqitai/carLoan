@@ -1,6 +1,6 @@
 <template>
   <div class="carEvaluate">
-    <m-header>臻车贷</m-header>
+    <!-- <m-header>臻车贷</m-header> -->
     <div class="base">
       <div class="steps_wrapper">
         <div class="steps">
@@ -81,7 +81,7 @@
 import mHeader from '@/components/Header';
 import { Toast } from 'vant'
 import { submitApply } from '../../api/index'
-import { checkPhone, checkIdentity } from '../../common/js/utils'
+import { checkPhone, checkIdentity, headAPP } from 'common/js/utils'
 export default {
   data() {
     return {
@@ -106,6 +106,7 @@ export default {
     }
   },
   created() {
+    headAPP()
   },
   methods: {
     submitApply() {

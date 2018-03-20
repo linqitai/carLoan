@@ -1,6 +1,6 @@
 <template>
   <div class="selectCarType" ref="selectCarType">
-    <m-header>选择车型</m-header>
+    <!-- <m-header>选择车型</m-header> -->
     <div class="base" ref="base">
       <div class='items' ref="items" v-for='(item, index) in carTypeList'>
           <div class="title">{{item[0].modelYear}}</div>
@@ -19,6 +19,7 @@
 import mHeader from '@/components/Header2';
 import { Toast } from 'vant'
 import {queryModelList} from '../../../api/index' //  queryForSeriesList, queryModelList
+import { headAPP } from 'common/js/utils.js'
 export default {
   data() {
     return {
@@ -28,6 +29,7 @@ export default {
     }
   },
   created() {
+    headAPP()
     this.queryModelList(this.seriesId)
   },
   methods: {
