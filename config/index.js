@@ -38,6 +38,7 @@ module.exports = {
                 // target: 'http://192.168.18.177:8030', // 子涵
                 // target:'http://121.199.33.100:8030',// 线上
                 target:'http://47.96.251.43:8030',// 线上有域名
+                // target:'http://47.96.251.26:8030',// 线上有域名
                 // target: 'http://www.zsbigdata.com.cn',
                 changeOrigin: true,
                 pathRewrite: {

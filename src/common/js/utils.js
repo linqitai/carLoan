@@ -41,7 +41,6 @@ export const checkIdentity = (value) => {
     return false
   }
 }
-
 // headAPP
 export const headAPP = () => {
 

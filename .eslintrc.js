@@ -29,7 +29,7 @@ module.exports = {
         "semi": [0],
         // 可以使用未定义的元素
         "no-undef": 0,
-        // space-before-function-paren 
+        // space-before-function-paren
         'space-before-function-paren': 0,
         'indent': 0,
         'no-unused-vars': 0,
