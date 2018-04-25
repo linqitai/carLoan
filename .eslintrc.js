@@ -31,6 +31,20 @@ module.exports = {
         "no-undef": 0,
         // space-before-function-paren 
         'space-before-function-paren': 0,
-        'indent': 0
+        'indent': 0,
+        'no-unused-vars': 0,
+        'no-trailing-spaces': 0,
+        'spaced-comment': 0,
+        'quotes': 0,
+        'eqeqeq': 0,
+        'no-useless-escape': 0,
+        'one-var': 0,
+        'comma-dangle': 0,
+        'padded-blocks': 0,
+        'no-shadow-restricted-names': 0,
+        'keyword-spacing': 0,
+        'space-before-blocks': 0,
+        'space-in-parens': 0,
+        'comma-spacing': 0
     }
 }

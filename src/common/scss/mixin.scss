@@ -1,5 +1,23 @@
-  @mixin border($color) {
+@import './common.scss';
+@mixin border($color) {
   border: none;
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    background: $color;
+    width: 100%;
+    height: 1px;
+    left: 0;
+    -webkit-transform: scaleY(0.5);
+    transform: scaleY(0.5);
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+  }
+}
+  @mixin border1pxBottom($color) {
+  border: none;
+  position: relative;
   &:after {
     content: '';
     position: absolute;
@@ -50,6 +68,10 @@
     right: -10px;
     bottom: -10px;
   }
+  &:active{
+    border-radius: $borderRadius;
+    background-color: rgba(17, 175, 153, .6)
+  }
 }
 
 @mixin main-color() {
@@ -57,19 +79,23 @@
 }
 
 @mixin btn($width) {
-  width: 100px;
-  line-height: 40px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80px;
+  height: 35px;
+  line-height: 35px;
   text-align: center;
   color: #ffffff;
-  font-size: 17px;
-  border-radius: 40px;
+  background-color: #11af99;
+  font-size: 16px;
+  border-radius: 10px;
   border: none;
   -webkit-user-select:none;
   -moz-user-select:none;
   -ms-user-select:none;
   user-select:none;
   &:active {
-    font-size: 15px;
+    font-size: 14px;
   }
 }
 @mixin fileUploadWrapper($pd_buttom) {
@@ -147,7 +173,7 @@
   //   border-bottom: 1px solid transparent;
   // }
   .title {
-    flex: 0 0 90px;
+    flex: 0 0 62px;
     margin-right: auto;
   }
   .titleMore {
@@ -175,12 +201,13 @@
       outline: 0;
       width: 96%;
       text-align: right;
-      line-height: 46px;
+      height: 24px;
+      line-height: 24px;
       font-size: 14px;
     }
   }
   .clear {
-    flex: 0 0 15px; 
+    flex: 0 0 15px;
     margin-left: 5px;
     color: #dddddd;
     .arrow_right{
@@ -191,5 +218,11 @@
       line-height: 48px;
       content: ' '
     }
+  }
+  .unit{
+    font-size: 13px;
+    color: #646464;
+    margin-left: 7px;
+    padding-right: 4px;
   }
 }

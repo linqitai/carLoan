@@ -1,155 +1,106 @@
 <template>
-  <div class='carEvaluate'>
-    <m-header>臻车贷</m-header>
-    <div class="base">
-    <div class='steps_wrapper'>
-      <div class='steps'>
-        <div class='steps_icon bgImg1'></div>
-        <div class='steps_texts'>
-          <div class='text active'>车辆评估</div>
-          <div class='text'>申请借款</div>
-          <div class='text'>线下办理</div>
-        </div>
-      </div>
-    </div>
-    <section class='contentWrapper'>
-      <div class='myCellWrapper border-1px' @click='carTypeEvent'>
-        <div class='title'>选择车型</div>
-        <div class='value'>
-          <input type='text' v-model='form.carType' placeholder='未选择' readonly>
-        </div>
-        <div class='clear'>
-          <van-icon name='arrow' />
-        </div>
-      </div>
-      <!-- 选择品牌POPUP -->
-      <van-popup v-model='showCarTypePop' position='bottom' class='van-popup-2'>
-        <mt-index-list>
-          <div class="selectTitle border-1px">
-            <div class="back-img" @click="closeSelectBrand">
-            </div>
-            <div class="text">
-              选择品牌
-            </div>
+  <div class='carEvaluate' id="carEvaluate">
+    <!-- <header>
+          <div class="backIcon" @click="back">
           </div>
-          <mt-index-section v-for='(item, index) in list' :index='item[0].initial' :key="index">
-            <span v-for='(cell, index) in item' :title='cell.brandName' :key="index" @click="chooseBrand(cell.brandId)">
-              <mt-cell :title='cell.brandName'>
-              </mt-cell>
-            </span>
-          </mt-index-section>
-        </mt-index-list>
-      </van-popup>
-      <!-- 选择车系POPUP -->
-      <van-popup v-model='showSeriesListPop' position='bottom' class='van-popup-2'>
-        <mt-index-list>
-          <div class="selectTitle border-1px">
-            <div class="back-img" @click="closeSelectSeries">
-            </div>
-            <div class="text">
-              选择车系
-            </div>
+          <div class="text">
+            臻车贷
           </div>
-          <mt-index-section v-for='(item, index) in seriesList' :index='item[0].seriesGroupName' :key="index">
-            <span v-for='(cell, index) in item' :key="index" @click="chooseSeries(cell.seriesId)">
-              <mt-cell :title='cell.seriesName'>
-              </mt-cell>
-            </span>
-          </mt-index-section>
-        </mt-index-list>
-      </van-popup>
-      <!-- 选择车型POPUP -->
-      <van-popup v-model='showModelListPop' position='bottom' class='van-popup-2'>
-        <mt-index-list>
-          <div class="selectTitle border-1px">
-            <div class="back-img" @click="closeSelectModel">
-            </div>
-            <div class="text">
-              选择车型
-            </div>
+          <div class="helpIcon" @click="toHelpPage">
           </div>
-          <mt-index-section v-for='(item, index) in modelList' :index='item[0].modelYear' :key="index">
-            <span v-for='(cell, index) in item' :key="index">
-              <div class="selectModel border-1px" @click="chooseModel(cell.modelName, cell.modelId, cell.minRegYear, cell.maxRegYear)" :key="index">
-                <div>{{cell.modelName}}</div>
-                <div class="mt10">指导价：{{cell.modelPrice}}, 排量：{{cell.liter}}</div>
-              </div>
-            </span>
-          </mt-index-section>
-        </mt-index-list>
-      </van-popup>
-      <div class='myCellWrapper border-1px' @click='timeEvent'>
-        <div class='title'>上牌时间</div>
-        <div class='value'>
-          <input type='text' v-model='form.time' placeholder='未选择' readonly>
-        </div>
-        <div class='clear'>
-          <van-icon name='arrow' />
+        </header> -->
+    <div class="base" id="base">
+      <div class='steps_wrapper'>
+        <div class='steps'>
+          <div class='steps_icon bgImg1'></div>
+          <div class='steps_texts'>
+            <div class='text active'>车辆评估</div>
+            <div class='text'>申请借款</div>
+            <div class='text'>线下办理</div>
+          </div>
         </div>
       </div>
-      <!-- 上牌时间Popup -->
-      <van-popup v-model='showTimePopup' position='bottom' class='van-popup-2'>
-        <div class="page-picker-wrapper" style="margin-bottom:2rem;">
-          <span style="float:left;font-size:1rem;padding:0.7rem 1rem" @click='showTimePopup = false'>取消</span>
-          <span style="float:right;font-size:1rem;padding:0.7rem 1rem;color:#5aa8f0" @click='timeHandlePickerConfirm()'>确定</span>
+      <section class='contentWrapper' id="contentWrapper">
+        <div class='myCellWrapper border-1px' @click='carTypeEvent'>
+          <div class='title'>选择车型</div>
+          <div class='value'>
+            <input class="selectCarType" type='text' v-model='form.carType' placeholder='未选择' readonly>
+          </div>
+          <div class='clear'>
+            <van-icon name='arrow' />
+          </div>
         </div>
-        <mt-picker :slots="slotsDate" @change="timeChange"></mt-picker>
-      </van-popup>
-      <div class='myCellWrapper border-1px' @click='cityEvent'>
-        <div class='title'>所在城市</div>
-        <div class='value'>
-          <input type='text' v-model='form.city' placeholder='未选择' readonly>
+        <div class='myCellWrapper border-1px' @click='timeEvent'>
+          <div class='title'>上牌时间</div>
+          <div class='value'>
+            <input type='text' v-model='form.time' placeholder='未选择' readonly>
+          </div>
+          <div class='clear'>
+            <van-icon name='arrow' />
+          </div>
         </div>
-        <div class='clear'>
-          <van-icon name='arrow' />
+        <!-- 上牌时间Popup -->
+        <van-popup v-model='showTimePopup' position='bottom' class='van-popup-2'>
+          <van-picker title="选择时间" :columns="timePickerColumns" show-toolbar @change="handleTimePickerChange" @cancel="handleTimePickerCancel" @confirm="timeHandlePickerConfirm"></van-picker>
+          </van-datetime-picker>
+        </van-popup>
+        <div class='myCellWrapper border-1px' @click='cityEvent'>
+          <div class='title'>所在城市</div>
+          <div class='value'>
+            <input type='text' v-model='form.city' placeholder='未选择' readonly>
+          </div>
+          <div class='clear'>
+            <van-icon name='arrow' />
+          </div>
         </div>
-      </div>
-      <!-- 所在城市Popup -->
-      <van-popup v-model='showCityPopup' position='bottom' class='van-popup-2'>
-        <van-picker :title="titleCity" :columns="cityPickerColumns" show-toolbar @change="handleCityPickerChange" @cancel="handleCityPickerCancel" @confirm="handleCityPickerConfirm"></van-picker>
-        </van-datetime-picker>
-      </van-popup>
-      <div class='myCellWrapper border-1px'>
-        <div class='titleMore'>行驶里程/万公里</div>
-        <div class='value'>
-          <input type='number' v-model='form.mileage' placeholder='请输入行驶里程'>
+        <!-- 所在城市Popup -->
+        <van-popup v-model='showCityPopup' position='bottom' class='van-popup-2'>
+          <van-picker :title="titleCity" :columns="cityPickerColumns" show-toolbar @change="handleCityPickerChange" @cancel="handleCityPickerCancel" @confirm="handleCityPickerConfirm"></van-picker>
+          </van-datetime-picker>
+        </van-popup>
+        <div class='myCellWrapper border-1px'>
+          <div class='titleMore'>行驶里程</div>
+          <div class='value'>
+            <input type="number" v-model='form.mileage' placeholder='请输入行驶里程' @blur="mileageBlur(form.mileage)">
+          </div>
+          <div class='clear' @click="form.mileage=''" v-show='form.mileage'>
+            <van-icon name='clear' />
+          </div>
+          <div class="unit">公里</div>
         </div>
-        <div class='clear' @click="form.mileage=''" v-show='form.mileage'>
-          <van-icon name='clear' />
+      </section>
+      <section class="btnBox">
+        <!-- 开始评估按钮 -->
+        <div class='btnWrapper' v-show='!isEvaluate'>
+          <div class='next_step_btn bg_color_green mt10' @click='beginEvaluateEvent'>评估</div>
         </div>
-      </div>
-    </section>
-    <section class="btnBox">
-      <!-- 开始评估按钮 -->
-      <div class='beginEvaluateBtn' v-show='!isEvaluate' @click='beginEvaluateEvent'></div>
-
-      <div class='btnWrapper' v-show='isEvaluate'>
-        <div>车辆评估价：
-          <span class='amount'>{{highPrice}}万</span>
+        <div class='btnWrapper mt12' v-show='isEvaluate'>
+          <div>
+            <span class='amount'>{{highPrice}}</span>
+          </div>
+          <button class='next_step_btn bg_color_green mt12' ref='next_step_btn' @click='applyBtn'>借款</button>
         </div>
-        <button class='next_step_btn bg_color_green mt24' ref='next_step_btn' @click='applyBtn'>申请借款</button>
-      </div>
-    </section>
-    <section class='advantageWrapper'>
-      <div class='title' v-if="showAdvantage">我们的优势</div>
-      <div class='content'>
-        <div class='box'>
-          <div class='img img1'></div>
-          <div class='mtb18 fs14'>费率低</div>
-          <div class="fontSize" v-if="showAdvantage">月费率9厘起</div>
+      </section>
+      <section class='advantageWrapper'>
+        <!--<div class='title' v-if="showAdvantage">臻车贷优势</div> -->
+        <div class='content'>
+          <div class='box'>
+            <div class='img img1'></div>
+            <div class='mtb18 fs14'>费率低</div>
+            <div class="fontSize" v-if="showAdvantage">月费率9厘起</div>
+          </div>
+          <div class='box'>
+            <div class='img img2'></div>
+            <div class='mtb18 fs14'>放款快</div>
+            <div class="fontSize" v-if="showAdvantage">最快当天可放款</div>
+          </div>
+          <div class='box'>
+            <div class='img img3'></div>
+            <div class='mtb18 fs14'>额度高</div>
+            <div class="fontSize" v-if="showAdvantage">最高估值100%</div>
+          </div>
         </div>
-        <div class='box'>
-          <div class='img img2'></div>
-          <div class='mtb18 fs14'>放款快</div>
-          <div class="fontSize" v-if="showAdvantage">最快当天可放款</div>
-        </div>
-        <div class='box'>
-          <div class='img img3'></div>
-          <div class='mtb18 fs14'>额度高</div>
-          <div class="fontSize" v-if="showAdvantage">最高估值100%</div>
-        </div>
-      </div>
-    </section>
+      </section>
     </div>
   </div>
 </template>
@@ -157,14 +108,14 @@
 <script>
 // import axios from 'axios'
 // import qs from 'qs'
-import mHeader from '@/components/HeaderBackAPP'
-import { Indicator, Toast } from 'mint-ui'
-import { queryForBrankList, queryForSeriesList, queryModelList, queryCitylList, queryCarPrice, visit, editApplyStatus } from '../../api/index'
+import BScroll from 'better-scroll'
+import { Toast } from 'vant'
+import { headAPP } from 'common/js/utils.js'
+import { getUserInfo, queryForBrankList, queryForSeriesList, queryModelList, queryCitylList, queryCarPrice, visit, editApplyStatus, dataCache } from '../../api/index'
 const citys = {
-  province: ['北京', '上海', '四川', '天津', '吉林', '宁夏', '安徽', '山东', '山西', '广东', '广西', '新疆', '江苏', '江西', '河北', '河南', '浙江', '海南',
-    '内蒙古', '湖北', '云南', '湖南', '甘肃', '福建', '西藏', '贵州', '辽宁', '重庆', '陕西', '青海', '黑龙江'
-  ]
+  province: ['安徽', '澳门', '北京', '重庆', '福建', '广东', '甘肃', '广西', '贵州', '湖北', '湖南', '河北', '河南', '海南', '黑龙江', '吉林', '江苏', '江西', '辽宁', '内蒙古', '宁夏', '青海', '四川', '山东', '上海', '山西', '陕西', '天津', '台湾', '香港', '新疆', '西藏', '云南', '浙江']
 };
+// console.log('citys:' + citys.province.length);
 const addressList = {
   '北京': ['北京'],
   '广东': ['广州', '深圳', '珠海', '汕头', '韶关', '佛山', '江门', '湛江', '茂名', '肇庆', '惠州', '梅州', '汕尾', '河源', '阳江', '清远', '东莞', '中山',
@@ -218,7 +169,6 @@ const addressList = {
 var years = ['2014', '2015', '2016', '2017']
 const months = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
 export default {
-  name: 'HelloWorld',
   data() {
     return {
       showAdvantage: true,
@@ -233,23 +183,36 @@ export default {
           flex: 1,
           values: ['2017'],
           className: 'slot1',
-          textAlign: 'right'
+          textAlign: 'left'
         }, {
           divider: true,
           content: '-',
           className: 'slot2'
         }, {
           flex: 1,
-          values: ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'],
-          defaultIndex: 0,
+          values: months,
+          defaultIndex: 2,
           className: 'slot3',
-          textAlign: 'left'
+          textAlign: 'right'
         }],
+      timePickerColumns: [
+        {
+          values: ['2017'],
+          className: 'column1',
+          defaultIndex: 0
+        },
+        {
+          values: months,
+          className: 'column2',
+          defaultIndex: 2
+        }
+      ],
       titleCity: '地区选择',
       cityPickerColumns: [
         {
           values: citys.province,
-          className: 'column1'
+          className: 'column1',
+          defaultIndex: 2
         },
         {
           values: ['北京'],
@@ -267,11 +230,11 @@ export default {
       minDate: new Date(),
       maxDate: new Date(),
       form: {
-        mileage: '',
         carType: '',
         modelId: '',
         time: '',
-        city: ''
+        city: '',
+        mileage: ''
       },
       province: '',
       city: '',
@@ -285,37 +248,184 @@ export default {
       currentCityName: '',
       currentCityId: '',
       highPrice: '',
-      carCreditId: '',
-      customerKey: parseInt(this.$route.query.customerKey),
-      accountTel: parseInt(this.$route.query.accountTel)
+      carCreditId: localStorage.getItem('carCreditId') ? localStorage.getItem('carCreditId') : '',
+      customerKey: parseInt(this.$route.query.accountId),
+      accountTel: parseInt(this.$route.query.phone),
+      from: 'app'
     }
   },
   created() {
-    // 用户进入页面后保存数据
-    this.visit()
-    localStorage.setItem('customerKey', this.customerKey)
-    localStorage.setItem('accountTel', this.accountTel)
-    localStorage.setItem('type', this.$route.query.type)
-    localStorage.setItem('shopId', this.$route.query.shopId)
-    localStorage.setItem('isLogin', this.$route.query.isLogin)
-    localStorage.setItem('from', this.$route.query.from)
+    headAPP();
     console.log('===carEvaluatePage===')
     console.log('customerKey:' + this.customerKey)
     console.log('accountTel:' + this.accountTel)
-    // 获取车辆品牌列表
-    this.queryForBrankList()
+    let hash = sessionStorage.getItem('hash2')
+    console.log('hash1:' + hash)
+    if (hash === null || hash === '') {
+      // 用户进入页面后获取上次所填写的数据
+      console.log('visit:customerKey-' + this.customerKey + ',accountTel-' + this.accountTel)
+      this.visit()
+      sessionStorage.setItem('hash2', 1)
+    }
+    if (this.$route.query.second) {
+      this.visit()
+    }
+    // 新增
+    if (!this.$route.query.second) {
+      this.visitInit()
+    }
+    // 判断当前用户的 customerKey 是否与上次进入这个页面的 customerKey 一样 是？获取上次本地存储的记录:从接口获取
+    if (localStorage.getItem('customerKey')) {
+      if (this.$route.query.accountId === localStorage.getItem('customerKey')) {
+        this.form.time = localStorage.getItem('time') ? localStorage.getItem('time') : ''
+        this.form.city = localStorage.getItem('provinceCity') ? localStorage.getItem('provinceCity') : ''
+        this.province = (this.form.city).split(',')[0]
+        this.city = (this.form.city).split(',')[1]
+        this.currentCityId = localStorage.getItem('currentCityId') ? localStorage.getItem('currentCityId') : ''
+        this.form.mileage = localStorage.getItem('mileage') ? localStorage.getItem('mileage') : ''
+        console.log(`modelName:${localStorage.getItem('modelName')}`)
+        if (localStorage.getItem('modelName')) {
+          let modelName = localStorage.getItem('modelName')
+          let modelId = localStorage.getItem('modelId')
+          let minRegYear = localStorage.getItem('minRegYear')
+          let maxRegYear = localStorage.getItem('maxRegYear')
+          console.log(`minRegYear:${minRegYear}`)
+          this.chooseModel(modelName, modelId, minRegYear, maxRegYear)
+        }
+      } else {
+        localStorage.setItem('customerKey', this.customerKey)
+        console.log('setItem(customerKey):' + this.customerKey)
+        localStorage.setItem('accountTel', this.accountTel)
+        localStorage.setItem('type', this.$route.query.type)
+        localStorage.setItem('shopId', this.$route.query.shopId)
+        localStorage.setItem('isLogin', this.$route.query.isLogin)
+        localStorage.setItem('from', 'app')
+        //  这里请求用户上次评估车辆所填写的数据
+      }
+    } else {
+      localStorage.setItem('customerKey', this.customerKey)
+      console.log('setItem(customerKey):' + this.customerKey)
+      localStorage.setItem('accountTel', this.accountTel)
+      localStorage.setItem('type', this.$route.query.type)
+      localStorage.setItem('shopId', this.$route.query.shopId)
+      localStorage.setItem('isLogin', this.$route.query.isLogin)
+      localStorage.setItem('from', "app")
+    }
+    // this.$nextTick(() => {
+    //   this._initScroll()
+    // })
   },
   methods: {
-    visit() {
+    getUserInfo() {
+      getUserInfo().then(res => {
+        if (res.code === 0) {
+          this.customerKey = res.reqId
+        } else {
+          console.log('cache失败')
+        }
+      })
+    },
+    _initScroll() {
+      this.baseScroll = new BScroll(document.getElementById('base'), {
+        click: true
+      })
+    },
+    toHelpPage() {
+      this.$router.push('/help')
+    },
+    back() {
+      if (this.$route.query.isSelectCarType) {
+        this.ssdataCache()
+      }
+      // h5返回安卓或是返回IOS
+      let ua = navigator.userAgent.toLowerCase()
+      if (/iphone|ipad|ipod/.test(ua)) {
+        popToViewController()
+      } else if (/android/.test(ua)) {
+        htmlToJava.popToViewController()
+      }
+    },
+    dataCache(params) {
+      dataCache(params).then(res => {
+        if (res.code === 0) {
+          console.log('cache成功')
+        } else {
+          console.log('cache失败')
+        }
+      })
+    },
+    mileageBlur(mileage) {
+      localStorage.setItem('mileage', mileage)
+    },
+    visitInit() {
+      console.log(this.accountTel, this.customerKey);
       let params = {
         zedAccount: this.accountTel,
         customerKey: this.customerKey
       }
       visit(params).then(res => {
+        console.log('visit:')
         console.log(res)
         if (res.code === 0) {
-          this.carCreditId = res.carCreditId
+          this.carCreditId = res.obj.carCreditId
           localStorage.setItem('carCreditId', this.carCreditId)
+          let zone = res.obj.zone
+          this.form.time = res.obj.regDate
+          this.form.mileage = res.obj.mile
+          this.form.modelId = res.obj.modelId
+          let params = {
+            cityId: zone
+          }
+          this.queryCity(params)
+          let params2 = {
+            modelId: this.form.modelId
+          }
+          this.queryMode(params2)
+        }
+      })
+    },
+    visit() {
+      console.log(this.accountTel, this.customerKey);
+      let params = {
+        zedAccount: this.accountTel,
+        customerKey: this.customerKey
+      }
+      visit(params).then(res => {
+        // form: {
+        //   carType: '',
+        //   modelId: '',
+        //   time: '',
+        //   city: '',
+        //   mileage: ''
+        // },
+        console.log('visit:')
+        console.log(res)
+        if (res.code === 0) {
+          this.carCreditId = res.obj.carCreditId
+          localStorage.setItem('carCreditId', this.carCreditId)
+          let zone = res.obj.zone
+          this.form.time = res.obj.regDate
+          this.form.mileage = res.obj.mile
+          this.form.modelId = res.obj.modelId
+          let params = {
+            cityId: zone
+          }
+          this.queryCity(params)
+          let params2 = {
+            modelId: this.form.modelId
+          }
+          this.queryMode(params2)
+        }
+      })
+    },
+    queryMode(params) {
+      queryModelList(params).then(res => {
+        console.log(res)
+        if (res.code === 0) {
+          let list = res.list
+          this.form.carType = list[0][0].modelName
+        } else {
+          Toast(res.error)
         }
       })
     },
@@ -347,10 +457,7 @@ export default {
       })
     },
     // 获取城市列表
-    queryCitylList(provName) {
-      let params = {
-        provName: provName
-      }
+    queryCitylList(params) {
       queryCitylList(params).then(res => {
         this.currentCityNames = res.list
         console.log(this.currentCityNames)
@@ -359,9 +466,31 @@ export default {
           if (this.currentCityNames[i].cityName === this.currentCityName) {
             this.currentCityId = this.currentCityNames[i].cityId
             console.log('this.currentCityId:' + this.currentCityId)
+            localStorage.setItem('currentCityId', this.currentCityId)
           }
         }
       })
+    },
+    // 获取城市
+    queryCity(params) {
+      queryCitylList(params).then(res => {
+        let list = res.list
+        this.form.city = list[0].provName + ',' + list[0].cityName
+        this.province = list[0].provName
+        this.city = list[0].cityName
+        console.log(`this.form.city:` + this.form.city)
+      })
+    },
+    handleTimePickerChange(picker, values) {
+      picker.setColumnValues(1, months);
+    },
+    handleTimePickerCancel() {
+      this.showTimePopup = false
+    },
+    handleTimePickerConfirm(value) {
+      console.log('time:' + value)
+      localStorage.setItem('time', value)
+      this.form.time = value
     },
     handleCityPickerChange(picker, values) {
       picker.setColumnValues(1, addressList[values[0]]);
@@ -372,14 +501,15 @@ export default {
     handleCityPickerConfirm(value) {
       this.showCityPopup = false
       this.form.city = value
-      console.log(value)
+      localStorage.setItem('provinceCity', value)
       this.province = value[0]
       this.city = value[1]
       this.currentCityName = value[1]
-      console.log(this.currentCityName)
       localStorage.setItem('city', this.currentCityName)
-      console.log(localStorage.getItem('city'))
-      this.queryCitylList(value[0])
+      let params = {
+        provName: this.province
+      }
+      this.queryCitylList(params)
     },
     closeSelectBrand() {
       // this.showCarTypePop = true
@@ -415,8 +545,8 @@ export default {
       }
       years = ayears
       // console.log('years:' + years)
-      this.slotsDate[0].values = years
-      this.slotsDate[2].values = months
+      this.timePickerColumns[0].values = years
+      this.timePickerColumns[1].values = months
       this.currentYear = years[0]
       this.currentMonth = months[0]
       this.showModelListPop = false
@@ -453,11 +583,11 @@ export default {
       })
     },
     queryCarPrice() {
-      // console.log('city:' + this.form.city)
-      // console.log(this.city)
+      // console.log('this.from.city11:' + this.city)
+      let inputs = document.getElementsByTagName('input')
       let params = {
-        carCreditId: this.carCreditId,
-        modelId: this.form.modelId, // 车型ID
+        carCreditId: this.carCreditId ? this.carCreditId : 1,
+        modelId: localStorage.modelId, // 车型ID
         regDate: this.form.time, // 待估车辆的上牌时间（格式：yyyy-MM）如2012-3
         mile: this.form.mileage, // 待估车辆的公里数，单位万公里
         zone: this.currentCityId, // 城市ID
@@ -467,37 +597,64 @@ export default {
         city: this.city
       }
       if (params.modelId === '' || params.modelId === null) {
-        Toast('请填选择车型')
+        Toast('请选择车型')
+        // this.carTypeEvent()
+        // inputs[0].focus()
         return
       }
       if (params.regDate === '' || params.regDate === null) {
-        Toast('请填选择上牌时间')
+        Toast('请选择上牌时间')
+        return
+      }
+      if (params.zone === '' || params.zone === null) {
+        Toast('请重新选择所在城市')
         return
       }
       if (params.city === '' || params.city === null) {
-        Toast('请填选择所在城市')
+        Toast('请选择所在城市')
         return
       }
       if (params.mile === '' || params.mile === null) {
         Toast('请填写行驶里程')
+        inputs[3].focus()
         return
       }
-      if (params.mile > 100) {
+      if (params.mile > 1000000) {
         Toast('行驶里程不能大于100万公里')
         return
       }
-      Indicator.open()
+      if (params.mile < 1) {
+        Toast('行驶里程不能小于1公里')
+        return
+      }
+      // Toast.loading({ mask: true });
       queryCarPrice(params).then(res => {
         if (res.code === 0) {
           this.highPrice = res.obj.highPrice
           this.showAdvantage = false
           this.isEvaluate = true
-        } else if (res.code === -1) {
+          // 存储用户填写信息
+          this.dataCache(params)
+        } else if (res.code == '-1') {
           Toast(res.error)
         }
-        Indicator.close()
+        // Toast.clear()
       })
-      Indicator.close()
+      // Toast.clear()
+    },
+    ssdataCache() {
+      let params = {
+        carCreditId: this.carCreditId ? this.carCreditId : 1,
+        modelId: localStorage.getItem('modelId'), // 车型ID
+        regDate: this.form.time, // 待估车辆的上牌时间（格式：yyyy-MM）如2012-3
+        mile: this.form.mileage, // 待估车辆的公里数，单位万公里
+        zone: this.currentCityId, // 城市ID
+        customerKey: this.customerKey, // 臻E盾用户ID
+        zedAccount: this.accountTel,
+        province: this.province,
+        city: this.form.city
+      }
+      this.dataCache(params)
     },
     beginEvaluateEvent() {
       // begin
@@ -505,8 +662,8 @@ export default {
       this.queryCarPrice()
     },
     carTypeEvent() {
-      this.showCarTypePop = true;
-      this.showCarTypePop = true;
+      // this.showCarTypePop = true;
+      this.$router.push(`./selectBrand`)
     },
     handlePickerCancel() {
       this.showCarTypePop = false;
@@ -524,14 +681,12 @@ export default {
     },
     timeHandlePickerConfirm(value) {
       this.showTimePopup = false;
-      this.form.time = this.currentDate;
+      this.form.time = value[0] + '-' + value[1];
+      localStorage.setItem('time', this.form.time)
     },
     cityEvent() {
       this.showCityPopup = true;
     }
-  },
-  components: {
-    mHeader
   }
 }
 </script>

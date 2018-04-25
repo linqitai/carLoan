@@ -32,4 +32,20 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
 }
+.van-picker__cancel, .van-picker__confirm {
+  color: #797979 !important;
+  font-size: 15px !important;
+}
+.van-picker__title{
+  color: #00917e !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+}
+.van-picker-column__item{
+  font-size: 15px;
+}
+.van-picker-column__item--selected{
+  color: #00917e !important;
+}
+
 </style>

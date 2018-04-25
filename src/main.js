@@ -5,19 +5,13 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import Vant from 'vant';
-import Mint from 'mint-ui';
-import MuseUI from 'muse-ui';
-import 'muse-ui/dist/muse-ui.css';
-import 'mint-ui/lib/style.css';
 import 'vant/lib/vant-css/index.css';
 import fastclick from 'fastclick'
 import './common/scss/reset.scss';
-// @import '../../common/scss/common.scss';
+import './common/js/app-api';
 fastclick.attach(document.body)
 
 Vue.use(Vant);
-Vue.use(Mint);
-Vue.use(MuseUI);
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

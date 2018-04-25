@@ -24,7 +24,8 @@
     "qs": "^6.5.1",
     "babel-runtime": "^6.26.0",
     "mint-ui": "^2.2.9",
-    "muse-ui": "^2.0.3"
+    "muse-ui": "^2.0.3",
+    "better-scroll": "^0.1.7"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

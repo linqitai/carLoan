@@ -1,6 +1,6 @@
 <template>
   <div class="carEvaluate" style="background-color:#fff">
-    <m-header>臻车贷</m-header>
+    <!-- <m-header>臻车贷</m-header> -->
     <div class="base">
       <div class="steps_wrapper">
         <div class="steps">
@@ -26,9 +26,9 @@
 
 <script>
 import mHeader from '@/components/Header';
+import { headAPP } from 'common/js/utils.js'
 
 export default {
-  name: 'HelloWorld',
   data() {
     return {
       isEvaluate: false,
@@ -56,6 +56,7 @@ export default {
     }
   },
   created() {
+    headAPP()
     this.customerKey = localStorage.getItem('customerKey')
     this.accountTel = localStorage.getItem('accountTel')
     this.type = localStorage.getItem('type')
@@ -66,7 +67,7 @@ export default {
   methods: {
     submitApply() {
       // window.location.href = `http://114.55.32.138/bigData/cdd/dist/#/carEvaluate?customerKey=${this.customerKey}&type=${this.type}&shopId=${this.shopId}&isLogin=${this.isLogin}&accountTel=${this.accountTel}`
-      this.$router.push(`/carEvaluate?customerKey=${this.customerKey}&type=${this.type}&shopId=${this.shopId}&isLogin=${this.isLogin}&accountTel=${this.accountTel}&from=${this.from}`)
+      this.$router.push(`/carEvaluate?customerKey=${this.customerKey}&type=${this.type}&shopId=${this.shopId}&isLogin=${this.isLogin}&accountTel=${this.accountTel}&from=${this.from}&second=1`)
     },
     carTypeEvent() {
       this.showPlatFormPop = true;
@@ -84,7 +85,6 @@ export default {
       this.b = true
       setTimeout(function() {
         self.b = false
-        console.log(`b:false`)
       }, 3000)
     }
   },

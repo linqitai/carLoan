@@ -1,6 +1,6 @@
 <template>
   <div class="carEvaluate">
-    <m-header>臻车贷</m-header>
+    <!-- <m-header>臻车贷</m-header> -->
     <div class="base">
       <div class="steps_wrapper">
         <div class="steps">
@@ -57,7 +57,7 @@
       </section>
       <section class="btnBox">
         <div class="btnWrapper">
-          <button class="next_step_btn bg_color_green" ref="next_step_btn" @click="submitApplyBtn">提交申请</button>
+          <button class="next_step_btn bg_color_green" ref="next_step_btn" @click="submitApplyBtn">提交</button>
         </div>
       </section>
       <section class="cooperationPlatWrapper">
@@ -79,11 +79,10 @@
 
 <script>
 import mHeader from '@/components/Header';
-import { Indicator, Toast } from 'mint-ui'
+import { Toast } from 'vant'
 import { submitApply } from '../../api/index'
-import { checkPhone, checkIdentity } from '../../common/js/utils'
+import { checkPhone, checkIdentity, headAPP } from 'common/js/utils'
 export default {
-  name: 'HelloWorld',
   data() {
     return {
       isEvaluate: false,
@@ -107,6 +106,7 @@ export default {
     }
   },
   created() {
+    headAPP()
   },
   methods: {
     submitApply() {
@@ -139,16 +139,13 @@ export default {
         inputs[2].focus()
         return
       }
-      Indicator.open()
       submitApply(params).then(res => {
         if (res.code === 0) {
           this.$router.push('/offlineManage')
         } else if (res.code === -1) {
           Toast('资料提交错误或重复提交')
         }
-        Indicator.close()
       })
-      Indicator.close()
     },
     submitApplyBtn() {
       this.submitApply()
