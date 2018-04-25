@@ -249,16 +249,16 @@ export default {
       currentCityId: '',
       highPrice: '',
       carCreditId: localStorage.getItem('carCreditId') ? localStorage.getItem('carCreditId') : '',
-      customerKey: parseInt(this.$route.query.accountId),
-      accountTel: parseInt(this.$route.query.phone),
+      customerKey: this.$route.query.accountId,
+      accountTel: this.$route.query.phone,
       from: 'app'
     }
   },
   created() {
+    // alert('accountTel:' + this.$route.query.phone + 'customerKey:' + this.$route.query.accountId);
     headAPP();
     console.log('===carEvaluatePage===')
-    console.log('customerKey:' + this.customerKey)
-    console.log('accountTel:' + this.accountTel)
+    // console.log('customerKey:' + this.$route.query.accountId)
     let hash = sessionStorage.getItem('hash2')
     console.log('hash1:' + hash)
     if (hash === null || hash === '') {
@@ -596,6 +596,7 @@ export default {
         province: this.province,
         city: this.city
       }
+      // alert('carCreditId:' + params.carCreditId + 'modelId:' + params.modelId + 'regDate:' + params.regDate + 'mile:' + params.mile + 'zone:' + params.zone + 'customerKey:' + params.customerKey + 'zedAccount:' + params.zedAccount + 'province:' + params.province + 'city:' + params.city);
       if (params.modelId === '' || params.modelId === null) {
         Toast('请选择车型')
         // this.carTypeEvent()

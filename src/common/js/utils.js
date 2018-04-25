@@ -46,16 +46,16 @@ export const headAPP = () => {
 
     if (jiexin.isIos()) {
     // alert(2)
-    // jiexin.isShowRight = function () {
+    jiexin.isShowRight = function () {
       let aa = {};
       aa.title = '';
       aa.imageUrl = 'https://qiniujiexino2opublic.51icare.cn/icon_help@3x.png';
       isShowRightButton(aa);
-    // }
+    }
   }
 
   if (jiexin.isAndroid()) {
-    // jiexin.isShowRight = function () {
+    jiexin.isShowRight = function () {
     // alert(2)
       let aa = {};
       aa.code = 1;
@@ -64,7 +64,7 @@ export const headAPP = () => {
       // https://qiniujiexino2opublic.51icare.cn/icon_help@3x.png
       // console.log(JSON.stringify(aa))
       htmlToJava.handleEDunWebViewAction(JSON.stringify(aa));
-    // }
+    }
   }
 
     jiexin.rightEvent = function () {
