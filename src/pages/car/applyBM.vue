@@ -110,14 +110,15 @@ export default {
   },
   methods: {
     submitApply() {
-      let inputs = document.getElementsByTagName('input')
+      let inputs = document.getElementsByTagName('input');
       let params = {
         name: this.form.name,
         mobile: this.form.mobile,
         carNum: this.form.identity,
         pushPlatformType: '',
         carCreditId: localStorage.getItem('carCreditId'),
-        city: localStorage.getItem('city')
+        city: localStorage.getItem('city'),
+        customerKey: localStorage.getItem('customerKey')
       }
       console.log(localStorage.getItem('city'))
       if (this.form.platform === '微贷网') {
