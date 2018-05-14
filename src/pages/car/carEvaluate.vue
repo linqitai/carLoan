@@ -271,9 +271,9 @@ export default {
       this.visit()
     }
     // 新增
-    if (!this.$route.query.second) {
-      this.visitInit()
-    }
+    // if (!this.$route.query.second) {
+    //   this.visitInit()
+    // }
     // 判断当前用户的 customerKey 是否与上次进入这个页面的 customerKey 一样 是？获取上次本地存储的记录:从接口获取
     if (localStorage.getItem('customerKey')) {
       if (this.$route.query.accountId === localStorage.getItem('customerKey')) {
@@ -286,10 +286,11 @@ export default {
         console.log(`modelName:${localStorage.getItem('modelName')}`)
         if (localStorage.getItem('modelName')) {
           let modelName = localStorage.getItem('modelName')
-          let modelId = localStorage.getItem('modelId')
+          let modelId = localStorage.getItem('modelId');
           let minRegYear = localStorage.getItem('minRegYear')
           let maxRegYear = localStorage.getItem('maxRegYear')
           console.log(`minRegYear:${minRegYear}`)
+          // alert(modelName + "," + modelId + "," + minRegYear + "," + maxRegYear);
           this.chooseModel(modelName, modelId, minRegYear, maxRegYear)
         }
       } else {
@@ -367,6 +368,7 @@ export default {
         console.log('visit:')
         console.log(res)
         if (res.code === 0) {
+          // alert("visitInit," + res.obj.modelId);
           this.carCreditId = res.obj.carCreditId
           localStorage.setItem('carCreditId', this.carCreditId)
           let zone = res.obj.zone
@@ -401,6 +403,7 @@ export default {
         console.log('visit:')
         console.log(res)
         if (res.code === 0) {
+          // alert("visit," + res.obj.modelId);
           this.carCreditId = res.obj.carCreditId
           localStorage.setItem('carCreditId', this.carCreditId)
           let zone = res.obj.zone
@@ -424,6 +427,7 @@ export default {
         if (res.code === 0) {
           let list = res.list
           this.form.carType = list[0][0].modelName
+          // alert("3" + list[0][0].modelName);
         } else {
           Toast(res.error)
         }

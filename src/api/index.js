@@ -4,7 +4,7 @@ let root = '/rz'
 // 用户进入页面后保存数据
 //
 let zcdH5Url = '';
-if( window.location.host == "114.215.211.3" ){
+if( window.location.host == "114.55.86.215" ){
   zcdH5Url = '/zcd4.0/dist'
 }else if(window.location.host == "www.zsbigdata.com.cn"){
   zcdH5Url = '/bigData/zcd4.0/dist'

@@ -53,6 +53,7 @@ export default {
       localStorage.setItem('time', '')
       localStorage.setItem('provinceCity', '')
       localStorage.setItem('mileage', '')
+      // alert(localStorage.modelName + "," + localStorage.modelId + "," + localStorage.minRegYear + "," + localStorage.maxRegYear);
       this.$router.push(`./carEvaluate?accountId=${customerKey}&phone=${accountTel}&isLogin=${isLogin}&isSelectCarType=1`)
     },
     queryModelList(seriesId) {
